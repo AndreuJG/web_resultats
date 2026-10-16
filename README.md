@@ -12,13 +12,13 @@ La carpeta local està vinculada amb `AndreuJG/web_resultats` i amb el projecte 
 
 ## Estat
 
-**Eurolliga i EuroCup masculines activades amb dades oficials**: resultats de la jornada, marcadors en directe, quart, temps restant i classificació. Les altres cinc competicions encara mostren dades fictícies.
+**Activades amb dades oficials:** Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina i EuroCup masculina. Eurolliga femenina, Champions i Tercera FEB encara mostren exemples ficticis.
 
 Inclou Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina i femenina, EuroCup masculina, Basketball Champions League i Tercera FEB E-A (antiga EBA).
 
 ## Desenvolupament
 
-Requisit: Node.js 22 o posterior. L'única dependència de producció és `@vercel/functions`, per a la memòria cau del servidor.
+Requisit: Node.js 22 o posterior. Dependències del servidor: `@vercel/functions` (memòria cau), `acorn` (lectura de dades SSR) i `seroval` (format dels serveis públics FEB). No s'envien a l'iPad.
 
 ```sh
 npm ci
@@ -27,9 +27,18 @@ npm test
 npm run dev
 ```
 
-El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Eurolliga i EuroCup es generen al servidor amb `api/eurolliga.mjs` i `api/eurocup.mjs`, servides també en `/eurolliga.html` i `/eurocup.html`. Comparteixen servei i plantilla, amb temporada, rutes i memòria cau separades per competició. `npm run dev` permet provar les rutes amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
+El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Les quatre competicions activades es generen al servidor amb les funcions d'`api/`. Comparteixen plantilla HTML i tenen adaptadors de font i memòria cau separats. `npm run dev` permet provar les rutes amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
 
-La consulta i la navegació funcionen sense JavaScript. En Eurolliga i EuroCup, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega s'ajorna mentre la pestanya estiga oculta. Les pàgines de demostració conserven la prova de recàrrega única als 60 segons.
+La consulta i la navegació funcionen sense JavaScript. En les quatre competicions activades, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega s'ajorna mentre la pestanya estiga oculta. Les pàgines de demostració conserven la prova de recàrrega única als 60 segons.
+
+## Lliga Endesa masculina i femenina
+
+- ACB: https://www.acb.com/es/liga/partidos i https://www.acb.com/es/liga/clasificacion. Es lligen únicament les dades JSON de l'HTML oficial, resolent les referències dels equips. Les jornades es consulten pels identificadors publicats per ACB; no es calculen per aproximació. El directe usa l'estat i el quart publicats; no s'inventa un rellotge.
+- LF Endesa: https://beta.competiciones.feb.es/lf-endesa/clasificacion i els serveis públics que usa aquest portal. La categoria, la temporada i els identificadors dels serveis es descobreixen des dels recursos oficials. Es combina el calendari de temporada amb el servei actualitzat per rang de dates i l'overview de directe, filtrat per categoria i partit. El calendari base, tot sol, no conté tots els resultats.
+
+La classificació indica expressament a quina jornada correspon, perquè pot ser anterior a la jornada de pròxims partits seleccionada. En la femenina es consulta la classificació històrica seleccionada quan la font la publica. Els horaris de la FEB es converteixen des d'Europe/Madrid respectant l'horari d'estiu i d'hivern. Els partits ajornats o sense marcador vàlid no es presenten com a 0–0 ni es declaren en joc només per l'hora prevista.
+
+Les respostes d'ACB i FEB tenen una memòria cau de 20 segons, amb conservació de l'última resposta vàlida fins a 6 hores si falla la font. La font pot publicar dades amb retard; es mostra l'hora de consulta, no una garantia de latència. La lectura de l'HTML oficial rebutja scripts executables i accepta només estructures de dades.
 
 ## Fonts d'Eurolliga
 
