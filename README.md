@@ -127,6 +127,12 @@ Els marcadors de Tabernes finalitzats o en joc enllacen a aquesta pàgina lleuge
 
 Els controls de navegació tenen fons transparent i vora discreta amb àrea tàctil de 44 px. TV és una entrada de la mateixa llista que les competicions, amb fons suau. L’agenda ordena les emissions i crea una taula independent per dia d’Europe/Madrid, amb l’hora en la primera columna.
 
+## Memòria cau de Tercera FEB E-A
+
+El calendari complet es reutilitza durant 12 hores. Les jornades acabades es comproven de nou després de 24 hores; les futures, després de 12 hores. Des de dues hores abans de qualsevol partit pendent i fins a sis hores després de l’inici, o amb directe confirmat, la memòria cau de la jornada dura 20 segons. Un marcador pendent més antic es reintenta als 15 minuts. La pàgina sense jornada explícita caduca com a màxim a les sis hores i abans quan s’acosta el següent partit. Si falta la classificació, es reintenta al minut.
+
+Vercel Runtime Cache conserva les entrades fins a 14 dies per a poder mostrar l’última resposta mentre `waitUntil` renova la jornada en segon pla. Les dades caducades mantenen l’hora original i es marquen com a antigues. La CDN conserva l’HTML com a màxim una hora, limitada pel termini de renovació de la jornada; durant el directe, com a màxim 20 segons. No hi ha cron: només es consulta amb visites. És memòria cau compartida i evictable, no arxiu permanent; una primera consulta sense dades guardades encara ha d’esperar la FEB. La resta de competicions i les estadístiques conserven la seua política anterior.
+
 ## Seleccions espanyoles
 
 `/seleccio-masculina.html` i `/seleccio-femenina.html` usen `lib/national.js` amb els calendaris i classificacions FIBA. Fonts inicials: classificació europea al Mundial masculí 2027, classificació a l’EuroBasket femení 2027 i Mundial femení 2026. Les competicions es declaren amb el seu codi oficial i gènere; per a nous cicles cal actualitzar aquest catàleg, que no inventa amistosos ni tornejos encara no publicats.
