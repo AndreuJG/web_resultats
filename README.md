@@ -12,7 +12,7 @@ La carpeta local està vinculada amb `AndreuJG/web_resultats` i amb el projecte 
 
 ## Estat
 
-**Activades amb dades oficials:** Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina i EuroCup masculina. Eurolliga femenina, Champions i Tercera FEB encara mostren exemples ficticis.
+**Activades amb dades oficials:** Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina, EuroCup masculina i Tercera FEB grup E-A. Eurolliga femenina i Champions encara mostren exemples ficticis.
 
 Inclou Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina i femenina, EuroCup masculina, Basketball Champions League i Tercera FEB E-A (antiga EBA).
 
@@ -27,9 +27,15 @@ npm test
 npm run dev
 ```
 
-El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Les quatre competicions activades es generen al servidor amb les funcions d'`api/`. Comparteixen plantilla HTML i tenen adaptadors de font i memòria cau separats. `npm run dev` permet provar les rutes amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
+El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Les cinc competicions activades es generen al servidor amb les funcions d'`api/`. Comparteixen plantilla HTML i tenen adaptadors de font i memòria cau separats. `npm run dev` permet provar les rutes amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
 
-La consulta i la navegació funcionen sense JavaScript. En les quatre competicions activades, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega s'ajorna mentre la pestanya estiga oculta. Les pàgines de demostració conserven la prova de recàrrega única als 60 segons.
+La consulta i la navegació funcionen sense JavaScript. En les cinc competicions activades, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega s'ajorna mentre la pestanya estiga oculta. Les pàgines de demostració conserven la prova de recàrrega única als 60 segons.
+
+## Tercera FEB grup E-A
+
+Ruta pública: `/tercera-feb-ea.html`. Comparteix l'adaptador FEB amb la femenina, amb selecció explícita del grup oficial `E-A`, temporada i memòria cau independents. La fase i els identificadors es descobreixen a https://beta.competiciones.feb.es/tercera-feb/clasificacion. Si el grup sol·licitat desapareix de la font, no es substituïx per un altre grup.
+
+Per a recuperar la temporada completa, es consulta el servei actualitzat de partits en finestres de dos mesos i es dedupliquen els identificadors de partit. Les consultes grans de tota la categoria poden quedar truncades. Els partits i la classificació es filtren pel grup E-A abans de publicar-los. Verificació inicial: 14 equips, 26 jornades, 7 partits per jornada. El directe s'usa quan el servei oficial en facilita dades per als identificadors dels partits seleccionats.
 
 Les dates inclouen el dia de la setmana en valencià i es calculen en Europe/Madrid. Per preferència del propietari, els clubs identificats amb país `ISR` en la font d'Euroleague Basketball es mostren amb el prefix personalitzat «Los genocidas de ». Aquesta etiqueta s'aplica només en la presentació de partits i classificacions; es conserven els noms de la font en les dades i s'indica que les etiquetes editorials no formen part de la font oficial. El país es consulta en les dades oficials de clubs, també per a jornades futures sense classificació publicada.
 

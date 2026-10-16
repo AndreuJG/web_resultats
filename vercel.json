@@ -19,6 +19,10 @@
     {
       "source": "/lf-endesa.html",
       "destination": "/api/lf-endesa"
+    },
+    {
+      "source": "/tercera-feb-ea.html",
+      "destination": "/api/tercera-feb-ea"
     }
   ]
 }

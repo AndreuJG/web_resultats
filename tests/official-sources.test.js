@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { acbData, febData } = require('../lib/official-html');
 const { acbGame } = require('../lib/acb');
-const { normalizeGame, madridDate, functionId } = require('../lib/feb');
+const { normalizeGame, madridDate, selectGroup, filterCalendar, calendarWindows } = require('../lib/feb');
 const { createSourceCache, unwrapSnapshot } = require('../lib/source-cache');
 
 test('ACB JSON stream resolves team references without executing scripts', () => {
@@ -70,4 +70,27 @@ test('source fallback retains its original timestamp and disables the live indic
   assert.equal(result.games[0].checkedAt, 1000000);
   assert.equal(result.games[0].stale, true);
   assert.match(result.games[0].label, /Dades antigues/);
+});
+
+test('Tercera FEB selects E-A explicitly and fails if it is missing', () => {
+  const edition = { feb: { grupos: [{ idGrupo: 90059, nombreGrupoFront: 'Grupo A-A' }, { idGrupo: 90067, nombreGrupoFront: 'Grupo E-A' }, { idGrupo: 90068, nombreGrupoFront: 'Grupo E-B' }] } };
+  const phase = { grupos: [{ idGrupo: 90059 }, { idGrupo: 90068 }, { idGrupo: 90067 }] };
+  assert.equal(selectGroup(edition, phase, 'E-A').idGrupo, 90067);
+  assert.throws(() => selectGroup(edition, { grupos: phase.grupos.slice(0, 2) }, 'E-A'));
+  assert.throws(() => selectGroup(edition, phase));
+});
+
+test('Tercera FEB calendar excludes other groups and non-regular phases', () => {
+  const days = [{ matches: [{ idPartido: 1, idGrupo: 90059, matchday: 'J3' }, { idPartido: 2, idGrupo: 90067, matchday: 'J3' }, { idPartido: 3, idGrupo: 90068, matchday: 'J3' }, { idPartido: 4, idGrupo: 90067, matchday: 'Final' }] }];
+  assert.deepEqual(filterCalendar(days, 90067).map(g => g.idPartido), [2]);
+});
+
+test('large FEB calendars are split into short windows across the entire season', () => {
+  assert.deepEqual(calendarWindows({ fechaInicio: '01-09-2026', fechaFin: '30-06-2027' }), [
+    { fechaInicio: '01-09-2026', fechaFin: '31-10-2026' },
+    { fechaInicio: '01-11-2026', fechaFin: '31-12-2026' },
+    { fechaInicio: '01-01-2027', fechaFin: '28-02-2027' },
+    { fechaInicio: '01-03-2027', fechaFin: '30-04-2027' },
+    { fechaInicio: '01-05-2027', fechaFin: '30-06-2027' }
+  ]);
 });
