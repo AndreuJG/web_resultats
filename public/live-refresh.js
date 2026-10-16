@@ -1,4 +1,11 @@
 (function () {
+  var form = document.getElementById('round-form');
+  var select = document.getElementById('jornada');
+  if (form && select) {
+    select.addEventListener('change', function () { form.submit(); });
+    var button = form.querySelector('button[type="submit"]');
+    if (button) { button.style.display = 'none'; }
+  }
   var status = document.getElementById('live-refresh-status');
   if (!status || status.getAttribute('data-auto') !== '1') { return; }
   var delay = Number(status.getAttribute('data-refresh-ms'));

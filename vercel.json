@@ -31,6 +31,10 @@
     {
       "source": "/champions.html",
       "destination": "/api/champions"
+    },
+    {
+      "source": "/televisio.html",
+      "destination": "/api/televisio"
     }
   ]
 }

@@ -52,6 +52,6 @@ test('official BCL club codes retain editorial labels without inferring country 
   const data = normalize([game({ hostCountryCode: 'ISR', teamB: { teamId: 2, code: 'HERZ', officialName: 'Bnei Penlink Herzliya' } })], [], 'BCL', null, now);
   assert.equal(data.games[0].home.country, undefined);
   assert.equal(data.games[0].away.country, 'ISR');
-  assert.match(page(data), /Los genocidas de Bnei Penlink Herzliya/);
+  assert.match(page(data), /HP Bnei Penlink Herzliya/);
   assert.equal(sourceUrls('ELW', now).gamesUrl, 'https://www.fiba.basketball/en/events/euroleague-women-26-27/games');
 });

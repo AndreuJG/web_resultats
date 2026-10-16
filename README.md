@@ -29,7 +29,7 @@ npm run dev
 
 El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Les set competicions es generen al servidor amb les funcions d'`api/`. Comparteixen plantilla HTML i tenen adaptadors de font i memòria cau separats. `npm run dev` permet provar les rutes amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
 
-La consulta i la navegació funcionen sense JavaScript. En les set competicions, un script ES5 adapta les recàrregues als partits i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega es cancel·la mentre la pestanya estiga oculta i només es recupera en tornar-hi.
+La consulta i la navegació funcionen sense JavaScript. En les set competicions, un script ES5 canvia de jornada en seleccionar-la i adapta les recàrregues als partits i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega es cancel·la mentre la pestanya estiga oculta i només es recupera en tornar-hi.
 
 ## Tercera FEB grup E-A
 
@@ -37,7 +37,7 @@ Ruta pública: `/tercera-feb-ea.html`. Comparteix l'adaptador FEB amb la femenin
 
 Per a recuperar la temporada completa, es consulta el servei actualitzat de partits en finestres de dos mesos i es dedupliquen els identificadors de partit. Les consultes grans de tota la categoria poden quedar truncades. Els partits i la classificació es filtren pel grup E-A abans de publicar-los. Verificació inicial: 14 equips, 26 jornades, 7 partits per jornada. El directe s'usa quan el servei oficial en facilita dades per als identificadors dels partits seleccionats.
 
-Les dates inclouen el dia de la setmana en valencià i es calculen en Europe/Madrid. Per preferència del propietari, els clubs identificats amb país `ISR` en les fonts oficials o en la llista de clubs BCL verificada es mostren amb el prefix personalitzat «Los genocidas de ». Aquesta etiqueta s'aplica només en la presentació de partits i classificacions; es conserven els noms de la font en les dades i s'indica que les etiquetes editorials no formen part de la font oficial. El país es consulta en les dades oficials de clubs, també per a jornades futures sense classificació publicada.
+Les dates inclouen el dia de la setmana en valencià i es calculen en Europe/Madrid. Per preferència del propietari, els clubs identificats amb país `ISR` en les fonts oficials o en la llista de clubs BCL verificada es mostren amb el prefix personalitzat «HP ». Aquesta etiqueta s'aplica només en la presentació de partits i classificacions; es conserven els noms de la font en les dades i s'indica que les etiquetes editorials no formen part de la font oficial. El país es consulta en les dades oficials de clubs, també per a jornades futures sense classificació publicada.
 
 ## Lliga Endesa masculina i femenina
 
@@ -96,3 +96,13 @@ Els codis oficials BCL `HOLO` i `HERZ` s’identifiquen com a clubs d’Israel s
 La política compartida `lib/refresh-policy.js` usa els partits de la jornada o setmana seleccionada: 30 segons amb directe confirmat; un minut des de 15 minuts abans de l’inici previst fins a sis hores després mentre no es confirme el resultat; com a màxim 15 minuts en la resta de casos. Si s’acosta un partit abans del següent interval, avança la comprovació. Amb totes les dades vàlides i tots els partits finalitzats, la consulta queda en mode manual. Les dades antigues es tornen a intentar al minut. Una hora desconeguda no s’interpreta com a inici imminent.
 
 Els temporitzadors només funcionen en la pestanya visible. En tornar a una pàgina amb el termini vençut, s’actualitza una vegada; si encara no ha vençut, conserva el temps restant. No hi ha cron ni consultes periòdiques independents de visites. Cada pestanya té el seu temporitzador; la memòria cau del servidor pot compartir respostes entre visites. Sense JavaScript, continua disponible l’actualització manual.
+
+## Agenda de televisió i navegació
+
+`/televisio.html` mostra les emissions anunciades durant les pròximes 168 hores, ordenades per hora, amb color i nom de competició. Fonts: catàlegs oficials Movistar per als dos tipus de subscripció, fitxes d’emissió per a particulars, guia de directes Movistar (inclou TV pública i dials; s’exclouen canals BAR) i canals publicats en el calendari ACB (DAZN, Movistar i autonòmiques). Les repeticions sense anunci de futura emissió en directe no s’incorporen. Els catàlegs es paginen seguint els enllaços oficials, amb un màxim de tres pàgines per catàleg. Les fitxes pendents de canal i els dials no publicats es mostren explícitament. La cobertura dels últims dies pot ser incompleta; mai s’inferix un canal només pels drets de tota una competició.
+
+Es combinen anuncis del mateix partit a la mateixa franja (marge de 30 minuts per als previs), conservant els canals confirmats. No es mesclen fases ni competicions conegudes diferents. Els horaris són d’emissió i poden incloure el previ. La pàgina consulta una agenda en memòria cau d’una hora i la CDN conserva HTML cinc minuts; no hi ha cron. La recàrrega visible és de 15 minuts i no consulta les fonts esportives cada vegada.
+
+La jornada es canvia amb l’esdeveniment `change` d’un selector natiu i s’envia el formulari GET, compatible amb Safari iOS 12. Sense JavaScript continua disponible el botó Mostra. Els enllaços Anterior i Següent respecten l’ordre de les jornades/fases publicades i conserven `auto=0`.
+
+Els resultats finalitzats del CB Tabernes Blanques en Tercera FEB E-A inclouen un enllaç al marcador i un altre «Estadístiques FEB», amb la ruta oficial `/tercera-feb/partido/{idPartido}`. S’obri en la mateixa pestanya i permet tornar amb Enrere. Es conserva la navegació completa de la federació; no s’incrusta el seu visor en l’iPad. Partit inicial verificat: https://beta.competiciones.feb.es/tercera-feb/partido/2537572.

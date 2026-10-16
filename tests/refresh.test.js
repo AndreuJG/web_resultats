@@ -27,7 +27,7 @@ function browser({ auto = '1', delay = 30000, hidden = false } = {}) {
   let clock = now, reloads = 0, id = 0;
   const timers = new Map(), listeners = {};
   const status = { getAttribute: name => name === 'data-auto' ? auto : String(delay) };
-  const doc = { hidden, getElementById: () => status, addEventListener: (name, fn) => { listeners[name] = fn; } };
+  const doc = { hidden, getElementById: name => name === 'live-refresh-status' ? status : null, addEventListener: (name, fn) => { listeners[name] = fn; } };
   const win = { location: { reload: () => { reloads++; } }, setTimeout: (fn, ms) => { timers.set(++id, { fn, at: clock + ms }); return id; }, clearTimeout: key => timers.delete(key), addEventListener: (name, fn) => { listeners[name] = fn; } };
   class Clock extends Date { constructor() { super(clock); } }
   vm.runInNewContext(fs.readFileSync('public/live-refresh.js', 'utf8'), { document: doc, window: win, Date: Clock });
