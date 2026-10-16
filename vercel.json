@@ -35,6 +35,10 @@
     {
       "source": "/televisio.html",
       "destination": "/api/televisio"
+    },
+    {
+      "source": "/estadistiques-feb.html",
+      "destination": "/api/estadistiques-feb"
     }
   ]
 }

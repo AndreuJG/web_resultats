@@ -116,3 +116,13 @@ En Eurolliga, EuroCup, Eurolliga femenina i BCL, els equips amb país ESP es mos
 L’agenda exclou NBA i WNBA abans de consultar les fitxes individuals i també en recuperar dades de la memòria cau.
 
 La web clàssica s’ha localitzat seguint el marcador de https://competiciones.feb.es/estadisticas/resultados/8/2026: `Partido.aspx?p=2537572` redirigix a `/partido/2537572` i conserva el mateix identificador de partit. La navegació Ficha / Estadísticas funciona en el navegador de comprovació; el visor pot tardar a carregar. No s’ha pogut certificar la compatibilitat real del visor extern amb l’iPad iOS 12.5.8.
+
+## Estadístiques lleugeres i agenda per dies
+
+`/estadistiques-feb.html?partit=2537572&jornada=1` genera HTML al servidor a partir del servei BoxScore del visor públic clàssic FEB. El servidor obté la sessió pública del visor des de la fitxa oficial i la conserva únicament en memòria durant cinc minuts; mai la retorna a l’iPad, al repositori, als logs ni a la memòria cau persistent. Si caduca, la renova una vegada. Es valida la competició Tercera FEB, el grup E-A i la identitat del club Tabernes Blanques abans de mostrar dades.
+
+La vista simple inclou minuts, punts, rebots, assistències i valoració; «Tirs i detall» afegix llançaments, recuperacions, pèrdues, taps, faltes i +/−. Es mostren els totals oficials i els parcials. Els camps buits es mostren amb un guió. La memòria cau dura 20 segons i conserva l’última resposta vàlida sis hores en cas d’error, amb hora de consulta original i sense pilot roig. La recàrrega adaptativa compartida usa 30 segons amb estat oficial en joc i s’atura quan ha acabat. Sense visita no hi ha sondeig. Encara falta comprovar un directe real de Tabernes mentre es juga.
+
+Els marcadors de Tabernes finalitzats o en joc enllacen a aquesta pàgina lleugera, amb la jornada i la pausa de recàrrega conservades. «Fitxa oficial FEB» manté accés a tota la navegació de la federació. La taula detallada permet desplaçament horitzontal; no s’envien imatges, biblioteques ni visors externs a l’iPad.
+
+Els controls de navegació tenen fons transparent i vora discreta amb àrea tàctil de 44 px. TV és una entrada de la mateixa llista que les competicions, amb fons suau. L’agenda ordena les emissions i crea una taula independent per dia d’Europe/Madrid, amb l’hora en la primera columna.
