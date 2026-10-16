@@ -31,6 +31,8 @@ El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Les 
 
 La consulta i la navegació funcionen sense JavaScript. En les quatre competicions activades, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega s'ajorna mentre la pestanya estiga oculta. Les pàgines de demostració conserven la prova de recàrrega única als 60 segons.
 
+Les dates inclouen el dia de la setmana en valencià i es calculen en Europe/Madrid. Per preferència del propietari, els clubs identificats amb país `ISR` en la font d'Euroleague Basketball es mostren amb el prefix personalitzat «Los genocidas de ». Aquesta etiqueta s'aplica només en la presentació de partits i classificacions; es conserven els noms de la font en les dades i s'indica que les etiquetes editorials no formen part de la font oficial. El país es consulta en les dades oficials de clubs, també per a jornades futures sense classificació publicada.
+
 ## Lliga Endesa masculina i femenina
 
 - ACB: https://www.acb.com/es/liga/partidos i https://www.acb.com/es/liga/clasificacion. Es lligen únicament les dades JSON de l'HTML oficial, resolent les referències dels equips. Les jornades es consulten pels identificadors publicats per ACB; no es calculen per aproximació. El directe usa l'estat i el quart publicats; no s'inventa un rellotge.

@@ -46,7 +46,7 @@ test('source failure preserves the last valid score and marks it stale', async (
       if (fail) throw new Error('Feed unavailable');
       return Response.json(header);
     }
-    if (url.endsWith('/games')) return Response.json({ data: [sourceGame], total: 1 });
+    if (new URL(url).pathname.endsWith('/games')) return Response.json({ data: [sourceGame], total: 1 });
     return Response.json([{ group: { rawName: 'Regular Season' }, standings: [{ club: { name: 'Barcelona' }, data: { position: 1, gamesPlayed: 1, gamesWon: 1, gamesLost: 0 } }] }]);
   } });
   const first = await load(null);
@@ -77,7 +77,7 @@ test('EuroCup requests use U seasons and cannot reuse EuroLeague entries in the 
   const fetchSource = async url => {
     urls.push(url);
     if (url.includes('/api/Header')) return Response.json(header);
-    if (url.endsWith('/games')) return Response.json({ total: 1, data: [{ gameCode: 58, round: 6, utcDate: game.date, played: false, group: { rawName: 'A' }, local: { club: { code: 'BAR', name: 'Local' }, score: 0 }, road: { club: { code: 'OLY', name: 'Visitant' }, score: 0 } }] });
+    if (new URL(url).pathname.endsWith('/games')) return Response.json({ total: 1, data: [{ gameCode: 58, round: 6, utcDate: game.date, played: false, group: { rawName: 'A' }, local: { club: { code: 'BAR', name: 'Local' }, score: 0 }, road: { club: { code: 'OLY', name: 'Visitant' }, score: 0 } }] });
     return Response.json([{ group: { rawName: 'A', order: 1 }, standings: [{ club: { name: 'Local' }, data: { position: 1, gamesPlayed: 1, gamesWon: 1, gamesLost: 0 } }] }]);
   };
   await createService({ competition: 'E', now: () => now, cache, fetch: fetchSource })(null);
