@@ -2,7 +2,7 @@ name: Arxiu permanent FEB i LF Endesa
 
 on:
   schedule:
-    - cron: '17 4 * * 1'
+    - cron: '17 2 * * *'
   workflow_dispatch:
   push:
     branches: [main]
