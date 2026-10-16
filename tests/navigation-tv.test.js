@@ -15,11 +15,11 @@ test('round selectors submit immediately even when automatic refresh is paused',
   change(); assert.equal(submissions, 1); assert.equal(button.style.display, 'none');
 });
 test('previous and next links preserve pause and omit unavailable rounds; Tabernes score links to official match', () => {
-  const data = { competition: 'TERCERA_EA', season: 'F2026', round: 1, rounds: [1, 2, 3], generatedAt: now, games: [{ home: { name: 'CB TABERNES BLANQUES' }, away: { name: 'UXO' }, date: '2026-10-05T18:45:00Z', state: 'final', label: 'Final', score: [72, 83], statsUrl: 'https://beta.competiciones.feb.es/tercera-feb/partido/2537572' }] };
+  const data = { competition: 'TERCERA_EA', season: 'F2026', round: 1, rounds: [1, 2, 3], generatedAt: now, games: [{ home: { name: 'CB TABERNES BLANQUES' }, away: { name: 'UXO' }, date: '2026-10-05T18:45:00Z', state: 'final', label: 'Final', score: [72, 83], statsUrl: 'https://baloncestoenvivo.feb.es/partido/2537572' }] };
   let html = render(data, false);
   assert.doesNotMatch(html, /← Anterior/);
   assert.match(html, /jornada=2&amp;auto=0">Següent/);
-  assert.match(html, /href="https:\/\/beta.competiciones.feb.es\/tercera-feb\/partido\/2537572"[^>]*>72 – 83<\/a>/);
+  assert.match(html, /href="https:\/\/baloncestoenvivo.feb.es\/partido\/2537572"[^>]*>72 – 83<\/a>/);
   assert.match(html, /Estadístiques FEB ↗/);
   html = render({ ...data, round: 3 });
   assert.match(html, /jornada=2">← Anterior/);

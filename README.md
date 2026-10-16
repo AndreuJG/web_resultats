@@ -105,7 +105,7 @@ Es combinen anuncis del mateix partit a la mateixa franja (marge de 30 minuts pe
 
 La jornada es canvia amb l’esdeveniment `change` d’un selector natiu i s’envia el formulari GET, compatible amb Safari iOS 12. Sense JavaScript continua disponible el botó Mostra. Els enllaços Anterior i Següent respecten l’ordre de les jornades/fases publicades i conserven `auto=0`.
 
-Els resultats finalitzats del CB Tabernes Blanques en Tercera FEB E-A inclouen un enllaç al marcador i un altre «Estadístiques FEB», amb la ruta oficial `/tercera-feb/partido/{idPartido}`. S’obri en la mateixa pestanya i permet tornar amb Enrere. Es conserva la navegació completa de la federació; no s’incrusta el seu visor en l’iPad. Partit inicial verificat: https://beta.competiciones.feb.es/tercera-feb/partido/2537572.
+Els resultats finalitzats del CB Tabernes Blanques en Tercera FEB E-A inclouen un enllaç al marcador i un altre «Estadístiques FEB», amb la ruta clàssica oficial `https://baloncestoenvivo.feb.es/partido/{idPartido}`. S’obri en la mateixa pestanya i permet tornar amb Enrere. Es conserva la navegació completa de la federació; no s’incrusta el seu visor en l’iPad. Partit inicial verificat: https://baloncestoenvivo.feb.es/partido/2537572.
 
 ## Presentació compacta
 
@@ -114,3 +114,5 @@ La portada mostra els accessos sense avisos d’activació ni explicacions de re
 En Eurolliga, EuroCup, Eurolliga femenina i BCL, els equips amb país ESP es mostren en negreta en resultats i classificacions. Euroleague Basketball publica el país en els clubs. En les dades FIBA sense país, s’identifiquen pels codis de club dins de cada competició: ELW ZARAG/VBC/GIR i BCL UCAM/UNI/SBB/AJB. La identificació és específica de competició: el codi FCB de Flammes Carolo en ELW no s’interpreta com FC Barcelona. Referències de participants: https://www.fiba.basketball/en/events/euroleague-women-26-27 i https://about.fiba.basketball/en/news/basketball-champions-league-season-11-lineup-announced.
 
 L’agenda exclou NBA i WNBA abans de consultar les fitxes individuals i també en recuperar dades de la memòria cau.
+
+La web clàssica s’ha localitzat seguint el marcador de https://competiciones.feb.es/estadisticas/resultados/8/2026: `Partido.aspx?p=2537572` redirigix a `/partido/2537572` i conserva el mateix identificador de partit. La navegació Ficha / Estadísticas funciona en el navegador de comprovació; el visor pot tardar a carregar. No s’ha pogut certificar la compatibilitat real del visor extern amb l’iPad iOS 12.5.8.
