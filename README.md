@@ -6,6 +6,10 @@ Web lleugera de resultats i classificacions per a Safari en iOS 12.5.8.
 - Repositori: https://github.com/AndreuJG/web_resultats
 - Projecte Vercel: `web-resultats`.
 
+## Publicació
+
+La carpeta local està vinculada amb `AndreuJG/web_resultats` i amb el projecte `web-resultats` de Vercel. Els canvis enviats a `main` es publiquen automàticament en la web de producció. Vercel genera les pàgines amb `npm run build` i publica `dist/`.
+
 ## Estat
 
 Primera prova de compatibilitat. **Totes les dades són fictícies**. No hi ha integració amb fonts esportives ni directe.
