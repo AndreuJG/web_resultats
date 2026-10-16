@@ -29,7 +29,7 @@ npm run dev
 
 El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Les set competicions es generen al servidor amb les funcions d'`api/`. Comparteixen plantilla HTML i tenen adaptadors de font i memòria cau separats. `npm run dev` permet provar les rutes amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
 
-La consulta i la navegació funcionen sense JavaScript. En les set competicions, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega s'ajorna mentre la pestanya estiga oculta.
+La consulta i la navegació funcionen sense JavaScript. En les set competicions, un script ES5 adapta les recàrregues als partits i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega es cancel·la mentre la pestanya estiga oculta i només es recupera en tornar-hi.
 
 ## Tercera FEB grup E-A
 
@@ -90,3 +90,9 @@ Els valors UTC de FIBA es converteixen explícitament a l’hora local. Les date
 Verificació inicial: quatre grups i 16 equips en la primera fase femenina; huit grups i 32 equips en la fase regular BCL. Les pàgines seleccionades ocupen aproximadament 9 i 12 KB d’HTML. No s’ha pogut comprovar un directe real mentre s’implementava; els estats en joc s’han comprovat amb dades controlades.
 
 Els codis oficials BCL `HOLO` i `HERZ` s’identifiquen com a clubs d’Israel segons les llistes oficials de participants i sortejos. S’aplica la mateixa etiqueta editorial de la resta de la web; el país de la seu del partit no s’usa per a deduir el país d’un club. Referència: https://www.championsleague.basketball/en/news/basketball-champions-league-season-11-draw-completed i https://www.championsleague.basketball/en/news/basketball-champions-league-season-10-lineup-announced.
+
+## Recàrrega adaptativa
+
+La política compartida `lib/refresh-policy.js` usa els partits de la jornada o setmana seleccionada: 30 segons amb directe confirmat; un minut des de 15 minuts abans de l’inici previst fins a sis hores després mentre no es confirme el resultat; com a màxim 15 minuts en la resta de casos. Si s’acosta un partit abans del següent interval, avança la comprovació. Amb totes les dades vàlides i tots els partits finalitzats, la consulta queda en mode manual. Les dades antigues es tornen a intentar al minut. Una hora desconeguda no s’interpreta com a inici imminent.
+
+Els temporitzadors només funcionen en la pestanya visible. En tornar a una pàgina amb el termini vençut, s’actualitza una vegada; si encara no ha vençut, conserva el temps restant. No hi ha cron ni consultes periòdiques independents de visites. Cada pestanya té el seu temporitzador; la memòria cau del servidor pot compartir respostes entre visites. Sense JavaScript, continua disponible l’actualització manual.
