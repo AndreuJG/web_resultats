@@ -1,0 +1,41 @@
+name: Arxiu permanent Tercera FEB
+
+on:
+  schedule:
+    - cron: '17 4 * * 1'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/archive-feb.yml'
+      - 'scripts/archive-feb.js'
+      - 'lib/feb-archive.js'
+
+concurrency:
+  group: archive-feb
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run archive:feb
+      - name: Guardar només les jornades noves o pendents
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/tercera-feb.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Update pending FEB fixtures and archive completed rounds"
+          git push origin HEAD:main

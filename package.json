@@ -4,6 +4,7 @@
   "private": true,
   "description": "Resultats de bàsquet: web lleugera per a Safari en iOS 12",
   "scripts": {
+    "archive:feb": "node scripts/archive-feb.js",
     "build": "node scripts/build.js",
     "test": "node --test tests/*.test.js",
     "dev": "node scripts/build.js && node scripts/dev.js"
