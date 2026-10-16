@@ -1,4 +1,4 @@
-name: Arxiu permanent Tercera FEB
+name: Arxiu permanent FEB i LF Endesa
 
 on:
   schedule:
@@ -10,6 +10,7 @@ on:
       - '.github/workflows/archive-feb.yml'
       - 'scripts/archive-feb.js'
       - 'lib/feb-archive.js'
+      - 'lib/feb.js'
 
 concurrency:
   group: archive-feb
@@ -30,12 +31,21 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - run: npm run archive:feb
+      - id: tercera
+        run: npm run archive:feb
+        continue-on-error: true
+      - id: lf
+        run: npm run archive:lf
+        continue-on-error: true
       - name: Guardar només les jornades noves o pendents
+        if: steps.tercera.outcome == 'success' || steps.lf.outcome == 'success'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/tercera-feb.json
+          git add data/tercera-feb.json data/lf-endesa.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "Update pending FEB fixtures and archive completed rounds"
           git push origin HEAD:main
+      - name: Indicar si alguna font no ha respost
+        if: steps.tercera.outcome == 'failure' || steps.lf.outcome == 'failure'
+        run: exit 1

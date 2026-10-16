@@ -127,17 +127,25 @@ Els marcadors de Tabernes finalitzats o en joc enllacen a aquesta pàgina lleuge
 
 Els controls de navegació tenen fons transparent i vora discreta amb àrea tàctil de 44 px. TV és una entrada de la mateixa llista que les competicions, amb fons suau. L’agenda ordena les emissions i crea una taula independent per dia d’Europe/Madrid, amb l’hora en la primera columna.
 
-## Arxiu permanent de Tercera FEB E-A
+## Arxiu permanent de Tercera FEB E-A i LF Endesa
 
-`data/tercera-feb.json` és l’arxiu versionat de totes les jornades i temporades. No caduca, no depén de Runtime Cache i es desplega amb l’aplicació. Una jornada només queda tancada quan tots els marcadors són finals i hi ha classificació oficial vàlida. Les jornades tancades no es tornen a consultar ni se sobreescriuen; qualsevol correcció excepcional es pot fer explícitament en aquest fitxer, conservant-ne l’historial Git.
+`data/tercera-feb.json` i `data/lf-endesa.json` són els arxius versionats de totes les jornades i temporades de cada competició, separats i validats pel seu codi oficial. No caduca, no depén de Runtime Cache i es desplega amb l’aplicació. Una jornada només queda tancada quan tots els marcadors són finals i hi ha classificació oficial vàlida. Les jornades tancades no es tornen a consultar ni se sobreescriuen; qualsevol correcció excepcional es pot fer explícitament en aquest fitxer, conservant-ne l’historial Git.
 
 Les jornades futures es mostren directament des del calendari guardat. Des de dues hores abans del primer partit pendent, la pàgina torna a l’adaptador dinàmic FEB amb memòria cau curta (20 segons prop del partit o amb directe confirmat). No depén del dia de la setmana: també funciona si es juga entre setmana. Les estadístiques mantenen el seu adaptador dinàmic independent.
 
-`npm run archive:feb` revisa només les jornades obertes i conserva literalment les tancades. Reutilitza les dades antigues dels partits tancats en el calendari i comença les consultes de dates en el primer partit pendent. Guarda el fitxer atòmicament només si acaba correctament. Un error de la FEB no reemplaça l’arxiu vàlid. Les temporades anteriors es conserven en el JSON; la navegació de la web continua mostrant la temporada actual.
+`npm run archive:feb` i `npm run archive:lf` revisen només les jornades obertes i conserva literalment les tancades. Reutilitza les dades antigues dels partits tancats en el calendari i comença les consultes de dates en el primer partit pendent. Guarda el fitxer atòmicament només si acaba correctament. Un error de la FEB no reemplaça l’arxiu vàlid. Les temporades anteriors es conserven en el JSON; la navegació de la web continua mostrant la temporada actual.
 
-El workflow `.github/workflows/archive-feb.yml` executa la revisió setmanal els dilluns a les 04:17 UTC, guarda els canvis en GitHub i activa el desplegament habitual. També es pot executar manualment des d’Actions. Aquesta única revisió setmanal funciona sense visites; el sondeig del directe continua depenent de les visites. Si la revisió falla i el calendari pendent supera set dies, una visita pot recuperar dades de la font oficial. Les jornades tancades continuen llegint-se de l’arxiu encara que la FEB no responga.
+El workflow `.github/workflows/archive-feb.yml` executa la revisió setmanal els dilluns a les 04:17 UTC, guarda els canvis en GitHub i activa el desplegament habitual. També es pot executar manualment des d’Actions. Si una font falla, es conserva el seu arxiu anterior, es guarda la revisió de l’altra si ha funcionat i el workflow indica la incidència. Aquesta única revisió setmanal funciona sense visites; el sondeig del directe continua depenent de les visites. Si la revisió falla i el calendari pendent supera set dies, una visita pot recuperar dades de la font oficial. Les jornades tancades continuen llegint-se de l’arxiu encara que la FEB no responga.
 
 La CDN pot guardar l’HTML una hora com a màxim, amb caducitat reduïda quan s’acosta el partit. La memòria cau temporal i la renovació en segon pla es mantenen com a suport per als partits en joc. No cal contractar ni connectar una base de dades externa.
+
+## Consultes separades de resultats i classificacions
+
+ACB conserva durant 24 hores els partits finalitzats de jornades explícites; les jornades pendents es revisen com a màxim cada hora i passen a 20 segons des de dues hores abans de qualsevol partit fins a sis hores després mentre continue pendent, o amb directe oficial. La ruta sense jornada explícita dura com a màxim un minut per a detectar el canvi de jornada. La classificació actual té una entrada separada d’un minut: consultar una jornada antiga no congela la classificació present.
+
+Eurolliga femenina i BCL comparteixen una única lectura del calendari complet entre totes les setmanes, amb la mateixa detecció d’inici basada en tots els partits de la competició. La classificació de cada fase es conserva separadament durant un minut. El calendari complet es revisa com a màxim cada hora; els partits amb data o hora desconeguda, com a màxim cada cinc minuts. Les eliminatòries sense taula oficial continuen sense classificació inventada.
+
+Els resultats i les classificacions conserven per separat l’hora real de consulta i l’estat de dades antigues. Una classificació renovada no fa passar un marcador antic per nou. Quan falla una font, es mostra l’última resposta oficial vàlida disponible identificada com a antiga. Una classificació antiga també activa un reintent de la pàgina al minut, inclús amb els partits finalitzats. No es crea cap sondeig independent de visites fora de la revisió setmanal dels arxius FEB. Eurolliga masculina, EuroCup i seleccions conserven els seus adaptadors actuals.
 
 ## Seleccions espanyoles
 

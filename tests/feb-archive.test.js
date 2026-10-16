@@ -72,3 +72,15 @@ test('weekly source failures cannot overwrite the last valid archive', async () 
   await assert.rejects(updateArchive(a, load), /FEB offline/);
   assert.equal(JSON.stringify(a), before);
 });
+
+test('LF archive is permanent, isolated from Tercera FEB, and pending fixtures still defer to live', async () => {
+  const a = archive();
+  for (const entry of Object.values(a.seasons.F2026.rounds)) entry.data.competition = 'LF';
+  const load = createService({ competition: 'LF', archive: a, now: () => now + WEEK, fetch: async () => { throw new Error('offline'); } });
+  assert.deepEqual((await load('1')).games[0].score, [70, 65]);
+  assert.equal(archivedRound(a, '1', now), null);
+  assert.equal(archivedRound(a, '2', now, 'LF').round, 2);
+  const start = Date.parse('2027-03-10T16:00:00Z');
+  a.seasons.F2026.rounds[2].savedAt = start - 86400000;
+  assert.equal(archivedRound(a, '2', start - 3600000, 'LF'), null);
+});

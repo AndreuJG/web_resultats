@@ -21,10 +21,12 @@ async function updateArchive(archive, load, now = Date.now, report = console.log
   return { ...archive, seasons: { ...archive.seasons, [season]: { updatedAt: now(), calendar, rounds } } };
 }
 
-async function main() {
-  const file = path.join(__dirname, '..', 'data', 'tercera-feb.json');
+async function main(competition = 'TERCERA_EA') {
+  const files = { TERCERA_EA: 'tercera-feb.json', LF: 'lf-endesa.json' };
+  if (!files[competition]) throw new Error('Unknown archival competition');
+  const file = path.join(__dirname, '..', 'data', files[competition]);
   const archive = JSON.parse(fs.readFileSync(file, 'utf8'));
-  const source = createService({ competition: 'TERCERA_EA', archive: false, calendarSeed: archive });
+  const source = createService({ competition, archive: false, calendarSeed: archive });
   async function retry(task) {
     for (let attempt = 0; ; attempt++) {
       try { return await task(); } catch (error) {
@@ -43,5 +45,5 @@ async function main() {
   fs.renameSync(file + '.new', file);
 }
 
-if (require.main === module) main().catch(error => { console.error(error.message); process.exitCode = 1; });
+if (require.main === module) main(process.argv[2]).catch(error => { console.error(error.message); process.exitCode = 1; });
 module.exports = { updateArchive };
