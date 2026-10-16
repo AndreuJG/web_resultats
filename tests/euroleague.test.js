@@ -63,7 +63,8 @@ test('rendering escapes feed names and does not require client-side fetching', (
   assert.match(html, /&lt;script&gt;/);
   assert.doesNotMatch(html, /<script>bad/);
   assert.match(html, /Marcador no disponible/);
-  assert.match(html, /<noscript>/);
+  assert.match(html, /<form[^>]*method="get"/);
+  assert.match(html, /<button type="submit">Mostra<\/button>/);
 });
 
 test('season rolls over in July, not January', () => {

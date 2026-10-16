@@ -49,6 +49,7 @@ test('agenda merges simulcasts and pre-game broadcasts but separates different c
   assert.equal(events.length, 2); assert.equal(events[0].channels.length, 2);
   assert.equal(events[0].date, other.date);
   assert.equal(tv.mergeEvents([{ ...event, title: 'Asisa Joventut - Barça' }, { ...other, title: 'Joventut - Barcelona' }], now).length, 1);
+  assert.equal(tv.mergeEvents([{ ...event, competition: 'NBA' }, { ...event, competition: 'WNBA' }, { ...event, source: 'https://www.movistarplus.es/deportes/baloncesto/nba-26-27/ficha' }, event], now).length, 1);
 });
 test('ACB broadcast platform is not mislabelled as a specific linear channel or dial', () => {
   const events = tv.acbEvents({ matches: [{ startDateTime: '2026-10-17T16:00:00Z', homeTeam: { shortName: 'A' }, awayTeam: { shortName: 'B' }, broadcastChannels: { primary: [{ name: 'DAZN' }, { name: 'Movistar Plus +' }, { name: 'Orange' }], secondary: [{ name: 'TV3/3Cat' }] } }] });

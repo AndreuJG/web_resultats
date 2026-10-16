@@ -55,3 +55,15 @@ test('official BCL club codes retain editorial labels without inferring country 
   assert.match(page(data), /HP Bnei Penlink Herzliya/);
   assert.equal(sourceUrls('ELW', now).gamesUrl, 'https://www.fiba.basketball/en/events/euroleague-women-26-27/games');
 });
+
+test('Spanish FIBA teams are bold in fixtures and standings with competition-specific codes', () => {
+  for (const [competition, code, name] of [['BCL', 'UCAM', 'UCAM Murcia'], ['ELW', 'VBC', 'Valencia Basket Club']]) {
+    const games = [game({ competition: { competitionCode: competition, start: '2026-10-01' }, teamA: { teamId: 1, code, officialName: name }, teamB: { teamId: 2, code: 'FCB', officialName: 'Flammes Carolo' } })];
+    const items = [{ type: 'groups', roundIds: [31110], data: { groups: [{ groupName: 'A', teamsStats: [{ team: 1, rank: 1, gamesPlayed: 0, gamesWon: 0, gamesLost: 0 }] }] } }];
+    const html = page(normalize(games, items, competition, null, now));
+    assert.equal(html.split('<strong>' + name + '</strong>').length - 1, 2);
+    assert.doesNotMatch(html, /<strong>Flammes Carolo<\/strong>/);
+    assert.doesNotMatch(html, /Actualització automàtica|Ordre oficial|HTML lleuger/);
+    assert.match(html, /data-refresh-ms="\d+" hidden/);
+  }
+});
