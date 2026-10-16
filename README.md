@@ -12,21 +12,36 @@ La carpeta local està vinculada amb `AndreuJG/web_resultats` i amb el projecte 
 
 ## Estat
 
-Primera prova de compatibilitat. **Totes les dades són fictícies**. No hi ha integració amb fonts esportives ni directe.
+**Eurolliga masculina activada amb dades oficials**: resultats de la jornada, marcadors en directe, quart, temps restant i classificació. Les altres sis competicions encara mostren dades fictícies.
 
 Inclou Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina i femenina, EuroCup masculina, Basketball Champions League i Tercera FEB E-A (antiga EBA).
 
 ## Desenvolupament
 
-Requisit: Node.js 22 o posterior. Sense dependències externes.
+Requisit: Node.js 22 o posterior. L'única dependència de producció és `@vercel/functions`, per a la memòria cau del servidor.
 
 ```sh
+npm ci
 npm run build
+npm test
+npm run dev
 ```
 
-El generador `scripts/build.js` escriu la web en `dist/`. Vercel executa la mateixa ordre i publica eixa carpeta. El contingut i els estils s'editen en el generador; `dist/` no es versiona.
+El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. L'Eurolliga es genera al servidor amb `api/eurolliga.mjs`, servida també en `/eurolliga.html`. `npm run dev` permet provar aquesta ruta amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
 
-La consulta i la navegació funcionen sense JavaScript. El script opcional usa sintaxi ES5 i permet programar una recàrrega al cap de 60 segons; després de recarregar, l'opció es desactiva.
+La consulta i la navegació funcionen sense JavaScript. En Eurolliga, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. La recàrrega s'ajorna mentre la pestanya estiga oculta. Les pàgines de demostració conserven la prova de recàrrega única als 60 segons.
+
+## Fonts d'Eurolliga
+
+- Calendari: `https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games`
+- Directe: `https://live.euroleague.net/api/Header?gamecode=58&seasoncode=E2026` (codi del partit variable).
+- Classificació: `https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/rounds/6/standings` (jornada variable).
+
+El codi de temporada es calcula amb inici al juliol. La jornada inicial és l'última que ha començat; es pot seleccionar una altra jornada amb el formulari. El calendari té una memòria cau de 5 minuts, els marcadors de 15 segons i la classificació d'1 minut. La pàgina HTML pot conservar-se fins a 10 segons en la CDN.
+
+La memòria cau regional de Vercel conserva l'última resposta vàlida si falla la font; és efímera i no garantix persistència. Si no hi ha marcador vàlid, es mostra «Marcador no disponible», mai un 0–0 inventat. Les dades antigues mostren un avís i l'hora original de consulta. La classificació conserva l'ordre oficial i no incorpora artificialment els partits en joc.
+
+Aquests recursos estan disponibles sense credencials en la comprovació inicial; no s'ha verificat un acord de servei ni una llicència general de redistribució. Si el proveïdor restringix l'accés, caldrà adaptar la integració a les condicions que establisca. No s'envien consultes a les fonts esportives des de l'iPad.
 
 ## Validació en el dispositiu
 
@@ -40,4 +55,4 @@ La verificació en un navegador modern no substituïx aquesta prova en l'iPad.
 
 ## Següents passos
 
-Validar les fonts oficials i el seu ús, integrar dades des del servidor amb memòria cau, mostrar l'hora de les dades i afegir directe només on la font ho permeta.
+Provar el directe en l'iPad real i integrar progressivament la resta de competicions amb les seues fonts oficials.

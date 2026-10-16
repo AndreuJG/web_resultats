@@ -1,4 +1,6 @@
 node_modules/
+*.tmp.json
+*.tmp.html
 dist/
 .vercel/
 .env
