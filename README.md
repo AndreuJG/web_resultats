@@ -12,7 +12,7 @@ La carpeta local està vinculada amb `AndreuJG/web_resultats` i amb el projecte 
 
 ## Estat
 
-**Eurolliga masculina activada amb dades oficials**: resultats de la jornada, marcadors en directe, quart, temps restant i classificació. Les altres sis competicions encara mostren dades fictícies.
+**Eurolliga i EuroCup masculines activades amb dades oficials**: resultats de la jornada, marcadors en directe, quart, temps restant i classificació. Les altres cinc competicions encara mostren dades fictícies.
 
 Inclou Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina i femenina, EuroCup masculina, Basketball Champions League i Tercera FEB E-A (antiga EBA).
 
@@ -27,15 +27,17 @@ npm test
 npm run dev
 ```
 
-El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. L'Eurolliga es genera al servidor amb `api/eurolliga.mjs`, servida també en `/eurolliga.html`. `npm run dev` permet provar aquesta ruta amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
+El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Eurolliga i EuroCup es generen al servidor amb `api/eurolliga.mjs` i `api/eurocup.mjs`, servides també en `/eurolliga.html` i `/eurocup.html`. Comparteixen servei i plantilla, amb temporada, rutes i memòria cau separades per competició. `npm run dev` permet provar les rutes amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
 
-La consulta i la navegació funcionen sense JavaScript. En Eurolliga, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. La recàrrega s'ajorna mentre la pestanya estiga oculta. Les pàgines de demostració conserven la prova de recàrrega única als 60 segons.
+La consulta i la navegació funcionen sense JavaScript. En Eurolliga i EuroCup, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega s'ajorna mentre la pestanya estiga oculta. Les pàgines de demostració conserven la prova de recàrrega única als 60 segons.
 
 ## Fonts d'Eurolliga
 
 - Calendari: `https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/games`
 - Directe: `https://live.euroleague.net/api/Header?gamecode=58&seasoncode=E2026` (codi del partit variable).
 - Classificació: `https://api-live.euroleague.net/v2/competitions/E/seasons/E2026/rounds/6/standings` (jornada variable).
+
+EuroCup usa les mateixes rutes amb competició `U` i temporada `U2026`. Les classificacions es mostren en taules independents per grup, ordenades segons la font oficial. El grup de cada partit s'indica al costat de la data. Els enllaços externs apunten al Game Center i la classificació d'EuroCup.
 
 El codi de temporada es calcula amb inici al juliol. La jornada inicial és l'última que ha començat; es pot seleccionar una altra jornada amb el formulari. El calendari té una memòria cau de 5 minuts, els marcadors de 15 segons i la classificació d'1 minut. La pàgina HTML pot conservar-se fins a 10 segons en la CDN.
 

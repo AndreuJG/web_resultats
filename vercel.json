@@ -3,5 +3,14 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/eurolliga.html", "destination": "/api/eurolliga" }]
+  "rewrites": [
+    {
+      "source": "/eurolliga.html",
+      "destination": "/api/eurolliga"
+    },
+    {
+      "source": "/eurocup.html",
+      "destination": "/api/eurocup"
+    }
+  ]
 }

@@ -3,11 +3,13 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 async function start() {
-  const { GET } = await import('../api/eurolliga.mjs');
+  const { GET: euroleague } = await import('../api/eurolliga.mjs');
+  const { GET: eurocup } = await import('../api/eurocup.mjs');
   http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://127.0.0.1:8766');
-    if (url.pathname === '/eurolliga.html' || url.pathname === '/api/eurolliga') {
-      const response = await GET(new Request(url));
+    const handler = { '/eurolliga.html': euroleague, '/api/eurolliga': euroleague, '/eurocup.html': eurocup, '/api/eurocup': eurocup }[url.pathname];
+    if (handler) {
+      const response = await handler(new Request(url));
       res.writeHead(response.status, Object.fromEntries(response.headers));
       res.end(await response.text());
       return;
