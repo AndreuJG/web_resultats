@@ -12,7 +12,7 @@ La carpeta local està vinculada amb `AndreuJG/web_resultats` i amb el projecte 
 
 ## Estat
 
-**Activades amb dades oficials:** Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina, EuroCup masculina i Tercera FEB grup E-A. Eurolliga femenina i Champions encara mostren exemples ficticis.
+**Les set competicions estan activades amb dades oficials.**
 
 Inclou Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina i femenina, EuroCup masculina, Basketball Champions League i Tercera FEB E-A (antiga EBA).
 
@@ -27,9 +27,9 @@ npm test
 npm run dev
 ```
 
-El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Les cinc competicions activades es generen al servidor amb les funcions d'`api/`. Comparteixen plantilla HTML i tenen adaptadors de font i memòria cau separats. `npm run dev` permet provar les rutes amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
+El generador `scripts/build.js` escriu les pàgines estàtiques en `dist/`. Les set competicions es generen al servidor amb les funcions d'`api/`. Comparteixen plantilla HTML i tenen adaptadors de font i memòria cau separats. `npm run dev` permet provar les rutes amb les fonts reals en http://127.0.0.1:8766. `dist/` no es versiona.
 
-La consulta i la navegació funcionen sense JavaScript. En les cinc competicions activades, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega s'ajorna mentre la pestanya estiga oculta. Les pàgines de demostració conserven la prova de recàrrega única als 60 segons.
+La consulta i la navegació funcionen sense JavaScript. En les set competicions, un script ES5 recarrega cada 30 segons i permet pausar amb `auto=0`. Un punt roig fix identifica els marcadors en joc; no apareix en dades antigues. La recàrrega s'ajorna mentre la pestanya estiga oculta.
 
 ## Tercera FEB grup E-A
 
@@ -37,7 +37,7 @@ Ruta pública: `/tercera-feb-ea.html`. Comparteix l'adaptador FEB amb la femenin
 
 Per a recuperar la temporada completa, es consulta el servei actualitzat de partits en finestres de dos mesos i es dedupliquen els identificadors de partit. Les consultes grans de tota la categoria poden quedar truncades. Els partits i la classificació es filtren pel grup E-A abans de publicar-los. Verificació inicial: 14 equips, 26 jornades, 7 partits per jornada. El directe s'usa quan el servei oficial en facilita dades per als identificadors dels partits seleccionats.
 
-Les dates inclouen el dia de la setmana en valencià i es calculen en Europe/Madrid. Per preferència del propietari, els clubs identificats amb país `ISR` en la font d'Euroleague Basketball es mostren amb el prefix personalitzat «Los genocidas de ». Aquesta etiqueta s'aplica només en la presentació de partits i classificacions; es conserven els noms de la font en les dades i s'indica que les etiquetes editorials no formen part de la font oficial. El país es consulta en les dades oficials de clubs, també per a jornades futures sense classificació publicada.
+Les dates inclouen el dia de la setmana en valencià i es calculen en Europe/Madrid. Per preferència del propietari, els clubs identificats amb país `ISR` en les fonts oficials o en la llista de clubs BCL verificada es mostren amb el prefix personalitzat «Los genocidas de ». Aquesta etiqueta s'aplica només en la presentació de partits i classificacions; es conserven els noms de la font en les dades i s'indica que les etiquetes editorials no formen part de la font oficial. El país es consulta en les dades oficials de clubs, també per a jornades futures sense classificació publicada.
 
 ## Lliga Endesa masculina i femenina
 
@@ -74,4 +74,19 @@ La verificació en un navegador modern no substituïx aquesta prova en l'iPad.
 
 ## Següents passos
 
-Provar el directe en l'iPad real i integrar progressivament la resta de competicions amb les seues fonts oficials.
+Provar el directe i la navegació de les set competicions en l'iPad real.
+
+## Eurolliga femenina i Basketball Champions League
+
+Rutes `/eurolliga-femenina.html` i `/champions.html`. Adaptador compartit `lib/fiba.js` per a les dades JSON del flux SSR de les webs oficials, sense executar-ne els scripts ni enviar-ne el pes a l’iPad.
+
+- FIBA: https://www.fiba.basketball/en/events/euroleague-women-26-27/games i `/standings`. L’URL de temporada es calcula amb inici al juliol.
+- BCL: https://www.championsleague.basketball/en/games i `/standings`.
+
+El selector agrupa els partits per setmana d’Europe/Madrid i fase oficial. El número intern de ronda de FIBA identifica una fase, no una jornada; no es presenta com una jornada. La classificació correspon a la fase seleccionada, conserva els grups i l’ordre oficial. Les eliminatòries indiquen que no tenen classificació de lliga. Les classificacions són les publicades actualment, no una reconstrucció històrica per setmana.
+
+Els valors UTC de FIBA es converteixen explícitament a l’hora local. Les dates sentinella, les hores sense confirmar i els equips encara no classificats s’indiquen com a pendents. El directe necessita l’indicador explícit de la font i un marcador vàlid; mostra el període i el rellotge publicats. La consulta es renova cada 20 segons, amb la mateixa conservació de dades antigues de sis hores. Si falla només la classificació, els resultats continuen disponibles.
+
+Verificació inicial: quatre grups i 16 equips en la primera fase femenina; huit grups i 32 equips en la fase regular BCL. Les pàgines seleccionades ocupen aproximadament 9 i 12 KB d’HTML. No s’ha pogut comprovar un directe real mentre s’implementava; els estats en joc s’han comprovat amb dades controlades.
+
+Els codis oficials BCL `HOLO` i `HERZ` s’identifiquen com a clubs d’Israel segons les llistes oficials de participants i sortejos. S’aplica la mateixa etiqueta editorial de la resta de la web; el país de la seu del partit no s’usa per a deduir el país d’un club. Referència: https://www.championsleague.basketball/en/news/basketball-champions-league-season-11-draw-completed i https://www.championsleague.basketball/en/news/basketball-champions-league-season-10-lineup-announced.

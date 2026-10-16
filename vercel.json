@@ -23,6 +23,14 @@
     {
       "source": "/tercera-feb-ea.html",
       "destination": "/api/tercera-feb-ea"
+    },
+    {
+      "source": "/eurolliga-femenina.html",
+      "destination": "/api/eurolliga-femenina"
+    },
+    {
+      "source": "/champions.html",
+      "destination": "/api/champions"
     }
   ]
 }

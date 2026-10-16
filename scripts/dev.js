@@ -8,9 +8,11 @@ async function start() {
   const { GET: acb } = await import('../api/acb.mjs');
   const { GET: female } = await import('../api/lf-endesa.mjs');
   const { GET: tercera } = await import('../api/tercera-feb-ea.mjs');
+  const { GET: elw } = await import('../api/eurolliga-femenina.mjs');
+  const { GET: bcl } = await import('../api/champions.mjs');
   http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://127.0.0.1:8766');
-    const handler = { '/eurolliga.html': euroleague, '/api/eurolliga': euroleague, '/eurocup.html': eurocup, '/api/eurocup': eurocup, '/acb.html': acb, '/api/acb': acb, '/lf-endesa.html': female, '/api/lf-endesa': female, '/tercera-feb-ea.html': tercera, '/api/tercera-feb-ea': tercera }[url.pathname];
+    const handler = { '/eurolliga-femenina.html': elw, '/api/eurolliga-femenina': elw, '/champions.html': bcl, '/api/champions': bcl, '/eurolliga.html': euroleague, '/api/eurolliga': euroleague, '/eurocup.html': eurocup, '/api/eurocup': eurocup, '/acb.html': acb, '/api/acb': acb, '/lf-endesa.html': female, '/api/lf-endesa': female, '/tercera-feb-ea.html': tercera, '/api/tercera-feb-ea': tercera }[url.pathname];
     if (handler) {
       const response = await handler(new Request(url));
       res.writeHead(response.status, Object.fromEntries(response.headers));
