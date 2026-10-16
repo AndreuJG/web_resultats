@@ -2,6 +2,10 @@
 
 Web lleugera de resultats i classificacions per a Safari en iOS 12.5.8.
 
+- Web pública: https://web-resultats.vercel.app
+- Repositori: https://github.com/AndreuJG/web_resultats
+- Projecte Vercel: `web-resultats`.
+
 ## Estat
 
 Primera prova de compatibilitat. **Totes les dades són fictícies**. No hi ha integració amb fonts esportives ni directe.
