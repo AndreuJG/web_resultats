@@ -17,6 +17,7 @@ test('round selectors submit immediately even when automatic refresh is paused',
 test('previous and next links preserve pause and omit unavailable rounds; Tabernes score links to official match', () => {
   const data = { competition: 'TERCERA_EA', season: 'F2026', round: 1, rounds: [1, 2, 3], generatedAt: now, games: [{ home: { name: 'CB TABERNES BLANQUES' }, away: { name: 'UXO' }, date: '2026-10-05T18:45:00Z', state: 'final', label: 'Final', score: [72, 83], statsUrl: '/estadistiques-feb.html?partit=2537572&jornada=1' }] };
   let html = render(data, false);
+  assert.match(html, /<strong>CB TABERNES BLANQUES<\/strong>/);
   assert.doesNotMatch(html, /← Anterior/);
   assert.match(html, /jornada=2&amp;auto=0">Següent/);
   assert.match(html, /href="\/estadistiques-feb.html\?partit=2537572&amp;jornada=1&amp;auto=0"[^>]*>72 – 83<\/a>/);

@@ -2,6 +2,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const competitions = [
+  ['seleccio-masculina', 'Selecció masculina', 'Espanya · FIBA'],
+  ['seleccio-femenina', 'Selecció femenina', 'Espanya · FIBA'],
   ['acb', 'Lliga Endesa masculina', 'ACB'],
   ['lf-endesa', 'Lliga Femenina Endesa', 'FEB'],
   ['eurolliga', 'Eurolliga masculina', 'Euroleague Basketball'],

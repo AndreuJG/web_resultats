@@ -39,6 +39,14 @@
     {
       "source": "/estadistiques-feb.html",
       "destination": "/api/estadistiques-feb"
+    },
+    {
+      "source": "/seleccio-masculina.html",
+      "destination": "/api/seleccio-masculina"
+    },
+    {
+      "source": "/seleccio-femenina.html",
+      "destination": "/api/seleccio-femenina"
     }
   ]
 }

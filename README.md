@@ -126,3 +126,13 @@ La vista simple inclou minuts, punts, rebots, assistències i valoració; «Tirs
 Els marcadors de Tabernes finalitzats o en joc enllacen a aquesta pàgina lleugera, amb la jornada i la pausa de recàrrega conservades. «Fitxa oficial FEB» manté accés a tota la navegació de la federació. La taula detallada permet desplaçament horitzontal; no s’envien imatges, biblioteques ni visors externs a l’iPad.
 
 Els controls de navegació tenen fons transparent i vora discreta amb àrea tàctil de 44 px. TV és una entrada de la mateixa llista que les competicions, amb fons suau. L’agenda ordena les emissions i crea una taula independent per dia d’Europe/Madrid, amb l’hora en la primera columna.
+
+## Seleccions espanyoles
+
+`/seleccio-masculina.html` i `/seleccio-femenina.html` usen `lib/national.js` amb els calendaris i classificacions FIBA. Fonts inicials: classificació europea al Mundial masculí 2027, classificació a l’EuroBasket femení 2027 i Mundial femení 2026. Les competicions es declaren amb el seu codi oficial i gènere; per a nous cicles cal actualitzar aquest catàleg, que no inventa amistosos ni tornejos encara no publicats.
+
+El selector tria competició/fase, i els resultats es filtren per codi ESP. La classificació mostra només el grup d’Espanya de la fase seleccionada, amb tots els seus equips. S’utilitzen els identificadors oficials de seleccions; no es confonen amb clubs que reutilitzen codis. Per defecte s’obri una fase amb directe o amb el pròxim partit anunciat; si no hi ha futurs, l’última disputada. La capçalera mostra el torneig real, perquè les fases classificatòries poden abastar diversos anys.
+
+Les fonts es consulten a demanda amb memòria cau de 20 segons i conservació de dades antigues fins a sis hores. La televisió reconeix anuncis de selecció masculina/femenina i usa colors específics, sense suposar canals pels drets. Si un anunci no especifica el gènere, es conserva l’etiqueta genèrica «Selecció espanyola». No es mostren com a partits d’Espanya les emissions d’altres seleccions.
+
+En Tercera FEB E-A, Tabernes Blanques es destaca en negreta tant als marcadors com a la classificació. En les estadístiques, Manu Aroca es reconeix per l’identificador FEB 1467686 i pels noms Manu/Manuel/M. Aroca Rubio; el seu nom apareix en negreta en vista simple i detallada.
