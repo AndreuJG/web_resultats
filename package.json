@@ -12,6 +12,8 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@vercel/functions": "^3.10.1"
+    "@vercel/functions": "^3.10.1",
+    "acorn": "^8.19.0",
+    "seroval": "^1.6.9"
   }
 }

@@ -11,6 +11,10 @@
     {
       "source": "/eurocup.html",
       "destination": "/api/eurocup"
+    },
+    {
+      "source": "/acb.html",
+      "destination": "/api/acb"
     }
   ]
 }
