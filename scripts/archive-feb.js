@@ -18,7 +18,17 @@ async function updateArchive(archive, load, now = Date.now, report = console.log
     rounds[round] = { savedAt: now(), closed: Boolean(isClosed(data)), data };
     report('Jornada ' + round + ': ' + (rounds[round].closed ? 'tancada' : 'pendent'));
   }
-  return { ...archive, seasons: { ...archive.seasons, [season]: { updatedAt: now(), calendar, rounds } } };
+  // The calendar page omits dates once it publishes a final score. Preserve
+  // the actual dates/times from the round pages, including postponed fixtures.
+  const games = new Map(Object.values(rounds).flatMap(entry => entry.data.games).map(g => [g.code, g]));
+  const dateFormat = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid' });
+  const timeFormat = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+  const merged = calendar.map(raw => {
+    const game = games.get(raw.idPartido);
+    if (!game?.date) return raw;
+    return { ...raw, fecha: dateFormat.format(new Date(game.date)), hora: game.timeUnknown ? '' : timeFormat.format(new Date(game.date)) };
+  });
+  return { ...archive, seasons: { ...archive.seasons, [season]: { updatedAt: now(), calendar: merged, rounds } } };
 }
 
 async function main(competition = 'TERCERA_EA') {

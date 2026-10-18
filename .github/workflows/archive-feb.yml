@@ -11,6 +11,9 @@ on:
       - 'scripts/archive-feb.js'
       - 'lib/feb-archive.js'
       - 'lib/feb.js'
+      - 'lib/feb-classic.js'
+      - 'lib/feb-classic-source.js'
+      - 'lib/feb-live.js'
 
 concurrency:
   group: archive-feb

@@ -139,6 +139,16 @@ El workflow `.github/workflows/archive-feb.yml` executa la revisió diària a le
 
 La CDN pot guardar l’HTML una hora com a màxim, amb caducitat reduïda quan s’acosta el partit. La memòria cau temporal i la renovació en segon pla es mantenen com a suport per als partits en joc. No cal contractar ni connectar una base de dades externa.
 
+## Fonts FEB clàssiques i recuperació d’errors
+
+Tercera FEB E-A i LF Endesa consulten per defecte el visor clàssic oficial `baloncestoenvivo.feb.es`: resultats i classificació de la jornada, amb selecció WebForms validada per temporada, grup i identificador de jornada. El calendari complet es llig una vegada des de la pàgina clàssica. `competiciones.feb.es/estadisticas/` és la segona ruta de lectura quan la primera falla. L’adaptador beta anterior es conserva només per a diagnòstic; la web i l’arxiu diari no el criden.
+
+Els marcadors en viu es consulten en el servei públic `https://intrafeb.feb.es/LiveStats.API/api/v1/overview` que utilitza el visor FEB. El servidor obté la sessió pública del visor i la manté només en memòria. No envia la sessió ni els formularis WebForms a l’iPad, als logs ni a la memòria cau persistent. La unió requerix identificador exacte de partit, competició i identitat dels dos equips. Els estats numèrics oficials 1/2/3 indiquen pendent/en joc/final. Els 0-0 previs no es presenten com a resultat final.
+
+Les dos lectures (resultats i directe) són independents. Si falla una, es conserva la informació vàlida de l’altra. Si falla tota la font, una instància acabada d’arrancar també pot mostrar la jornada de l’arxiu permanent amb la seua hora original i l’avís de dades antigues. Un marcador antic no mostra el pilot de directe. Els resultats finals acabats de publicar no són reemplaçats per un directe antic en memòria cau. Les dades de recuperació es tornen a intentar després de 20 segons de memòria cau; no queden congelades com si foren noves.
+
+L’arxiu diari exigix una resposta oficial renovada: una jornada recuperada de l’arxiu antic no es torna a guardar amb data nova. La font clàssica aporta també l’hora real dels partits finalitzats, que es conserva quan el calendari general només mostra el marcador. Un error en LF Endesa no impedix guardar Tercera FEB, i el workflow informa de la incidència.
+
 ## Consultes separades de resultats i classificacions
 
 ACB conserva durant 24 hores els partits finalitzats de jornades explícites; les jornades pendents es revisen com a màxim cada hora i passen a 20 segons des de dues hores abans de qualsevol partit fins a sis hores després mentre continue pendent, o amb directe oficial. La ruta sense jornada explícita dura com a màxim un minut per a detectar el canvi de jornada. La classificació actual té una entrada separada d’un minut: consultar una jornada antiga no congela la classificació present.
