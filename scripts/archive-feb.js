@@ -42,7 +42,8 @@ async function main(competition = 'TERCERA_EA') {
       try { return await task(); } catch (error) {
         if (attempt >= 2) throw error;
         console.log('La FEB no respon; nou intent.');
-        await new Promise(resolve => setTimeout(resolve, 1000 * (attempt + 1)));
+        const transient = /fetch failed|timeout|timed out|HTTP 5\d\d/i.test(error.message);
+        await new Promise(resolve => setTimeout(resolve, transient ? [5000, 15000][attempt] : 1000 * (attempt + 1)));
       }
     }
   }
