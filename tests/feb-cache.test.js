@@ -80,3 +80,21 @@ test('saved rounds are shared across fresh service instances without querying FE
   assert.equal(result.stale, false);
   assert.equal(result.at, at);
 });
+
+
+test('background refresh does not claim a source failure, but a failed renewal remains visible', async () => {
+  let time = Date.parse('2026-10-18T10:00:00Z'), reject;
+  const tasks = [], cached = createSourceCache(null, () => time);
+  const value = { competition: 'LF', season: 'F2026', round: 4, rounds: [4], games: [{ home: { name: 'Local' }, away: { name: 'Visitant' }, state: 'live', label: 'En joc', score: [25, 20] }], standings: { value: [] } };
+  await cached('notice', 20, async () => value);
+  time += 21000;
+  const snapshot = await cached('notice', 20, () => new Promise((resolve, fail) => { reject = fail; }), 86400, { defer: task => tasks.push(task) });
+  const render = require('../lib/euroleague-page').render;
+  assert.equal(snapshot.refreshing, true);
+  assert.doesNotMatch(render(unwrapSnapshot(snapshot, time)), /Algunes dades no s’han pogut renovar/);
+  assert.equal(unwrapSnapshot(snapshot, time).games[0].stale, true);
+  reject(new Error('timeout')); await Promise.all(tasks);
+  const failed = await cached('notice', 20, async () => { throw new Error('timeout'); }, 86400);
+  assert.match(render(unwrapSnapshot(failed, time)), /Algunes dades no s’han pogut renovar/);
+  assert.equal(failed.at, time - 21000);
+});

@@ -166,3 +166,10 @@ El selector tria competició/fase, i els resultats es filtren per codi ESP. La c
 Les fonts es consulten a demanda amb memòria cau de 20 segons i conservació de dades antigues fins a sis hores. La televisió reconeix anuncis de selecció masculina/femenina i usa colors específics, sense suposar canals pels drets. Si un anunci no especifica el gènere, es conserva l’etiqueta genèrica «Selecció espanyola». No es mostren com a partits d’Espanya les emissions d’altres seleccions.
 
 En Tercera FEB E-A, Tabernes Blanques es destaca en negreta tant als marcadors com a la classificació. En les estadístiques, Manu Aroca es reconeix per l’identificador FEB 1467686 i pels noms Manu/Manuel/M. Aroca Rubio; el seu nom apareix en negreta en vista simple i detallada.
+
+
+### Continuïtat quan falla una font
+
+Les còpies de reserva d'ACB, FIBA i Euroleague es retenen fins a 30 dies a la memòria cau compartida; això no canvia la freqüència de consulta dels partits en viu. La memòria cau és prescindible i pot ser expulsada: l'històric permanent de FEB continua als JSON del repositori. Una instància amb dades locals caducades consulta si una altra ja ha guardat una còpia més recent.
+
+ACB mostra els marcadors encara que la classificació no estiga disponible i reutilitza la primera lectura de resultats en una visita sense jornada seleccionada. Les renovacions d'ACB, FIBA i FEB poden continuar en segon pla: esperem fins a 1,5 segons per la resposta actualitzada abans de servir la còpia de reserva. Renovar en segon pla no es tracta com una fallada confirmada. Si la renovació falla, es conserva l'hora original i s'avisa que les dades són antigues; els marcadors antics no porten el pilot de directe. Els errors de font es registren amb la clau de consulta i, en les consultes HTML, el servidor, la durada i el codi de transport, sense credencials.

@@ -79,3 +79,47 @@ test('FIBA shares the full calendar across weeks and detects a live game outside
   assert.equal(fallback.games[0].checkedAt, at);
   assert.equal(fallback.standings.stale, false);
 });
+
+
+test('ACB shows real scores on a cold visit when the standings source is unavailable', async () => {
+  const filters = { seasons: [{ id: 10, startYear: 2026 }], rounds: [{ id: 101, roundNumber: 1 }] };
+  let matchRequests = 0;
+  const load = acb.createService({ now: () => now, fetch: async url => {
+    if (url.includes('clasificacion')) throw new Error('standings timeout');
+    matchRequests++;
+    return new Response(reactHTML({ selectedFilters: { season: 10, round: 101 }, availableFilters: filters,
+      matches: [{ id: 1, matchStatus: 'FINALIZED', startDateTime: '2026-10-10T16:00:00Z', homeTeam: { shortName: 'Local' }, awayTeam: { shortName: 'Visitant' }, homeScore: 81, awayScore: 79 }] }));
+  } });
+  const data = await load(null);
+  assert.deepEqual(data.games[0].score, [81, 79]);
+  assert.equal(data.standings, null);
+  assert.equal(matchRequests, 1);
+  const html = require('../lib/euroleague-page').render(data);
+  assert.match(html, /81 – 79/);
+  assert.match(html, /La classificació oficial no està disponible/);
+});
+
+test('expired local cache adopts a newer shared snapshot instead of falling back to old scores', async () => {
+  const { createSourceCache } = require('../lib/source-cache');
+  const entries = new Map();
+  const cache = { get: async key => entries.get(key), set: async (key, value) => entries.set(key, value) };
+  let time = now;
+  const first = createSourceCache(cache, () => time);
+  await first('shared-score', 20, async () => [10, 8]);
+  time += 21000;
+  await createSourceCache(cache, () => time)('shared-score', 20, async () => [18, 14]);
+  const result = await first('shared-score', 20, async () => { throw new Error('must use shared score'); });
+  assert.deepEqual(result.value, [18, 14]);
+  assert.equal(result.stale, false);
+});
+
+test('overnight source failure on a cold instance preserves real scores and their original age', async () => {
+  const { createSourceCache } = require('../lib/source-cache');
+  const entries = new Map();
+  const cache = { get: async key => entries.get(key), set: async (key, value) => entries.set(key, value) };
+  await createSourceCache(cache, () => now)('overnight', 20, async () => [71, 68]);
+  const result = await createSourceCache(cache, () => now + 8 * 3600000)('overnight', 20, async () => { throw new Error('source timeout'); });
+  assert.deepEqual(result.value, [71, 68]);
+  assert.equal(result.stale, true);
+  assert.equal(result.at, now);
+});
