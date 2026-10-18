@@ -117,8 +117,8 @@ test('overnight source failure on a cold instance preserves real scores and thei
   const { createSourceCache } = require('../lib/source-cache');
   const entries = new Map();
   const cache = { get: async key => entries.get(key), set: async (key, value) => entries.set(key, value) };
-  await createSourceCache(cache, () => now)('overnight', 20, async () => [71, 68]);
-  const result = await createSourceCache(cache, () => now + 8 * 3600000)('overnight', 20, async () => { throw new Error('source timeout'); });
+  await createSourceCache(cache, () => now)('overnight', 20, async () => [71, 68], 2592000);
+  const result = await createSourceCache(cache, () => now + 8 * 3600000)('overnight', 20, async () => { throw new Error('source timeout'); }, 2592000);
   assert.deepEqual(result.value, [71, 68]);
   assert.equal(result.stale, true);
   assert.equal(result.at, now);

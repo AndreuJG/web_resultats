@@ -98,3 +98,16 @@ test('background refresh does not claim a source failure, but a failed renewal r
   assert.match(render(unwrapSnapshot(failed, time)), /Algunes dades no s’han pogut renovar/);
   assert.equal(failed.at, time - 21000);
 });
+
+
+test('a quick background renewal returns the new live score in the same page request', async () => {
+  let time = 1000000;
+  const tasks = [], cached = createSourceCache(null, () => time);
+  await cached('fast-live', 20, async () => [12, 10]);
+  time += 21000;
+  const result = await cached('fast-live', 20, async () => [20, 18], 86400, { defer: task => tasks.push(task) });
+  await Promise.all(tasks);
+  assert.deepEqual(result.value, [20, 18]);
+  assert.equal(result.at, time);
+  assert.equal(result.stale, false);
+});
