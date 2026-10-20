@@ -57,3 +57,12 @@ test('Manu Aroca is bold in simple and detailed statistics without highlighting 
     assert.doesNotMatch(html, /<strong>J\. AROCA RUBIO<\/strong>/);
   }
 });
+
+
+test('national default retains the played phase the following day before advancing to the next fixtures', () => {
+  const played = { ...match(1, '2026-10-18T18:00:00'), gameResultStatusCode: 'VALID', teamAScore: 80, teamBScore: 70 };
+  const next = match(2, '2026-11-26T18:00:00');
+  const data = [source([played, next])];
+  assert.equal(build(data, 'ESM', null, Date.parse('2026-10-19T12:00:00Z')).round, 1);
+  assert.equal(build(data, 'ESM', null, Date.parse('2026-10-20T12:00:00Z')).round, 2);
+});

@@ -104,3 +104,24 @@ test('EuroCup standings keep separate groups in their official order', () => {
   assert.ok(html.indexOf('Grup A') < html.indexOf('Grup B'));
   assert.equal((html.match(/<table>/g) || []).length, 3);
 });
+
+
+test('European rounds keep current standings when future or historical matches are selected', async () => {
+  const time = Date.parse('2026-10-20T12:00:00Z'), urls = [];
+  const source = [1, 2, 3].map(round => ({ gameCode: round, round, utcDate: round === 3 ? '2026-10-24T16:00:00Z' : '2026-10-' + (round === 1 ? '10' : '17') + 'T16:00:00Z', played: round < 3, local: { club: { code: 'A', name: 'Local' }, score: 70 }, road: { club: { code: 'B', name: 'Visitant' }, score: 65 } }));
+  const load = createService({ now: () => time, fetch: async url => {
+    urls.push(url);
+    if (new URL(url).pathname.endsWith('/games')) return Response.json({ data: source, total: 3 });
+    if (url.includes('/standings')) return Response.json([{ group: { rawName: 'Regular Season' }, standings: [{ club: { name: 'Local' }, data: { position: 1, gamesPlayed: 2, gamesWon: 2, gamesLost: 0 } }] }]);
+    return Response.json({ data: [], total: 0 });
+  } });
+  assert.equal((await load(null)).round, 3);
+  for (const selected of ['1', '3']) {
+    const data = await load(selected);
+    assert.equal(data.round, Number(selected));
+    assert.equal(data.standings.value[0].teams[0].played, 2);
+    assert.match(data.standingsNote, /Jornada 2/);
+  }
+  assert.equal(urls.filter(url => url.includes('/standings')).length, 1);
+  assert.ok(urls.some(url => url.includes('/rounds/2/standings')));
+});

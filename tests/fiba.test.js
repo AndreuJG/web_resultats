@@ -30,11 +30,11 @@ test('FIBA marks live only on explicit source state and preserves score and cloc
   assert.equal((html.match(/class="live-dot"/g) || []).length, 1);
   assert.doesNotMatch(html, />0 – 0</);
 });
-test('FIBA selection uses weeks and isolates standings by phase while preserving official ranks', () => {
+test('FIBA can show a future phase while preserving the latest played group table and official ranks', () => {
   const first = { type: 'groups', standingHeaderName: 'Regular Season', roundIds: [31110], data: { groups: [{ groupName: 'A', teamsStats: [{ rank: 2, team: 1, gamesPlayed: 1, gamesWon: 0, gamesLost: 1 }, { rank: 1, team: 2, gamesPlayed: 1, gamesWon: 1, gamesLost: 0 }] }] } };
   const other = { ...first, roundIds: [31112], data: { groups: [{ groupName: 'WRONG', teamsStats: first.data.groups[0].teamsStats }] } };
   const data = normalize([game(), game({ gameId: 2, round: { roundId: 31112, roundName: 'Round of 16' }, gameDateTimeUTC: '2027-02-03T17:00:00' })], [other, first], 'BCL', null, now);
-  assert.equal(data.roundLabel, 'Fase regular · Setmana del 12/10');
+  assert.equal(data.roundLabel, 'Round of 16 · Setmana del 01/02');
   assert.equal(data.standings.value[0].name, 'Grup A');
   assert.equal(data.standings.value[0].teams[0].name, 'Club B');
   assert.throws(() => normalize([game()], [], 'BCL', 999, now), { status: 400 });
@@ -66,4 +66,18 @@ test('Spanish FIBA teams are bold in fixtures and standings with competition-spe
     assert.doesNotMatch(html, /Actualització automàtica|Ordre oficial|HTML lleuger/);
     assert.match(html, /data-refresh-ms="\d+" hidden/);
   }
+});
+
+
+test('FIBA retains results through the following day, then shows future fixtures with the latest played phase table', () => {
+  const time = Date.parse('2026-10-20T10:00:00Z');
+  const games = [game({ liveGameStatus: 999, teamAScore: 70, teamBScore: 65 }), game({ gameId: 2, round: { roundId: 31112, roundName: 'Second Round' }, gameDateTimeUTC: '2026-10-21T17:00:00' })];
+  const items = [{ type: 'groups', standingHeaderName: 'First Round', roundIds: [31110], data: { groups: [{ groupName: 'A', teamsStats: [{ rank: 1, team: 1, gamesPlayed: 1, gamesWon: 1, gamesLost: 0 }] }] } }];
+  assert.equal(normalize(games, items, 'BCL', null, Date.parse('2026-10-15T20:00:00Z')).round, 1);
+  assert.equal(normalize(games, items, 'BCL', null, time).round, 2);
+  const future = normalize(games, items, 'BCL', 2, time);
+  assert.equal(future.round, 2);
+  assert.equal(future.standings.value[0].teams[0].played, 1);
+  assert.match(future.standingsNote, /Primera fase/);
+  assert.equal(normalize(games, items, 'BCL', null, Date.parse('2026-10-21T17:01:00Z')).round, 2);
 });

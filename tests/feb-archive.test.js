@@ -5,12 +5,12 @@ const { createService } = require('../lib/feb');
 const { updateArchive } = require('../scripts/archive-feb');
 const now = Date.parse('2026-10-17T10:00:00Z');
 function fixture(round, state, date) {
-  return { competition: 'TERCERA_EA', season: 'F2026', round, rounds: [1, 2], standings: { value: [] }, scheduleStale: false,
+  return { competition: 'TERCERA_EA', season: 'F2026', round, rounds: [1, 2], standings: state === 'final' ? { value: [{ name: 'Grup E-A', teams: [{ name: 'Local', position: 1, played: round, won: round, lost: 0 }, { name: 'Visitant', position: 2, played: round, won: 0, lost: round }] }] } : null, scheduleStale: false,
     games: [{ code: round, state, date, score: state === 'final' ? [70, 65] : null, home: { name: 'Local' }, away: { name: 'Visitant' }, label: state === 'final' ? 'Final' : 'Pendent', stale: false }] };
 }
 function archive() {
   return { version: 1, seasons: { F2026: { updatedAt: now, rounds: {
-    1: { savedAt: now, closed: true, data: fixture(1, 'final', '2026-10-10T16:00:00Z') },
+    1: { savedAt: now, closed: true, data: fixture(1, 'final', '2026-10-16T16:00:00Z') },
     2: { savedAt: now, closed: false, data: fixture(2, 'scheduled', '2027-03-10T16:00:00Z') }
   } } } };
 }
@@ -35,9 +35,10 @@ test('March fixtures use permanent schedule in October and defer to live two hou
   assert.equal(archivedRound(a, '2', start + 3600000), null);
 });
 
-test('default page selects next or today round using Madrid dates and never mutates the archive', () => {
+test('default page retains results through the following day and then shows the next round without mutating the archive', () => {
   const a = archive(), before = JSON.stringify(a);
-  assert.equal(archivedRound(a, null, now).round, 2);
+  assert.equal(archivedRound(a, null, now).round, 1);
+  assert.equal(archivedRound(a, null, Date.parse('2026-10-18T10:00:00Z')).round, 2);
   assert.equal(JSON.stringify(a), before);
   assert.equal(archivedRound(a, '99', now), null);
   assert.equal(archivedRound(a, '1', Date.parse('2027-10-17T10:00:00Z')), null);
@@ -83,4 +84,30 @@ test('LF archive is permanent, isolated from Tercera FEB, and pending fixtures s
   const start = Date.parse('2027-03-10T16:00:00Z');
   a.seasons.F2026.rounds[2].savedAt = start - 86400000;
   assert.equal(archivedRound(a, '2', start - 3600000, 'LF'), null);
+});
+
+
+test('FEB shows latest real standings with future fixtures without modifying historical archives', async () => {
+  for (const competition of ['LF', 'TERCERA_EA']) {
+    const a = archive();
+    for (const entry of Object.values(a.seasons.F2026.rounds)) entry.data.competition = competition;
+    const before = JSON.stringify(a);
+    const load = createService({ competition, archive: a, now: () => now, fetch: async () => { throw new Error('No source read needed'); } });
+    const current = await load(null);
+    assert.equal(current.round, 1);
+    assert.equal(current.standings.value[0].teams[0].played, 1);
+    const future = await load('2');
+    assert.equal(future.round, 2);
+    assert.equal(future.games[0].state, 'scheduled');
+    assert.equal(future.standings.value[0].teams[0].played, 1);
+    assert.match(future.standingsNote, /Jornada 1/);
+    assert.equal(future.standings.at, now);
+    assert.equal(JSON.stringify(a), before);
+    const first = structuredClone(a.seasons.F2026.rounds[1]);
+    a.seasons.F2026.rounds[2] = { savedAt: now + 1000, closed: true, data: { ...fixture(2, 'final', '2026-10-16T16:00:00Z'), competition } };
+    const historical = await load('1');
+    assert.equal(historical.round, 1);
+    assert.equal(historical.standings.value[0].teams[0].played, 2);
+    assert.deepEqual(a.seasons.F2026.rounds[1], first);
+  }
 });

@@ -123,3 +123,34 @@ test('overnight source failure on a cold instance preserves real scores and thei
   assert.equal(result.stale, true);
   assert.equal(result.at, now);
 });
+
+
+test('ACB retains results the following day, advances afterwards, and keeps standings independent', async () => {
+  let time = Date.parse('2026-10-19T12:00:00Z');
+  const start = '2026-10-24T16:00:00Z';
+  const filters = { seasons: [{ id: 10, startYear: 2026 }], rounds: [{ id: 101, roundNumber: 1 }, { id: 102, roundNumber: 2 }] };
+  const load = acb.createService({ now: () => time, fetch: async url => {
+    if (url.includes('clasificacion')) return new Response(reactHTML({ selectedFilters: { season: 10, round: 101 }, availableFilters: filters, standings: [
+      { team: { shortName: 'Local' }, position: 1, matchesPlayed: 1, wins: 1, losses: 0 },
+      { team: { shortName: 'Visitant' }, position: 2, matchesPlayed: 1, wins: 0, losses: 1 }
+    ] }));
+    const round = url.includes('jornada=101') ? 101 : 102;
+    const live = round === 102 && time >= Date.parse(start);
+    return new Response(reactHTML({ selectedFilters: { season: 10, round }, availableFilters: filters, matches: [{
+      id: round, startDateTime: round === 101 ? '2026-10-18T16:00:00Z' : start,
+      matchStatus: round === 101 ? 'FINALIZED' : live ? 'IN_PROGRESS' : 'NOT_STARTED', homeScore: 70, awayScore: 65,
+      homeTeam: { shortName: 'Local' }, awayTeam: { shortName: 'Visitant' }
+    }] }));
+  } });
+  assert.equal((await load(null)).round, 1);
+  time = Date.parse('2026-10-20T12:00:00Z');
+  assert.equal((await load(null)).round, 2);
+  const future = await load('2');
+  assert.equal(future.round, 2);
+  assert.equal(future.standings.value[0].teams[0].played, 1);
+  assert.match(future.standingsNote, /Jornada 1/);
+  time = Date.parse(start) + 60000;
+  const live = await load(null);
+  assert.equal(live.round, 2);
+  assert.equal(live.games[0].state, 'live');
+});

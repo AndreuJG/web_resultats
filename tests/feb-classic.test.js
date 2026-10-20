@@ -123,3 +123,26 @@ test('live API failures keep the last score marked old, and cannot overwrite a f
   assert.deepEqual(final.games[0].score, [70,65]);
   assert.equal(final.games[0].stale, false);
 });
+
+
+test('FEB historical results use the latest live-round table while archived files remain unchanged', async () => {
+  const a = saved(), source = mock(), time = Date.parse('2026-10-18T10:05:00Z');
+  a.seasons.F2026.rounds[1] = { savedAt: now - 86400000, closed: true, data: {
+    competition: 'LF', season: 'F2026', round: 1, rounds: [1, 2], games: [{ code: 9001, date: '2026-10-11T10:00:00Z', state: 'final', label: 'Final', score: [70, 65], home: { name: 'Local & Equip' }, away: { name: 'Visitant' } }],
+    standings: { value: [{ name: 'LF', teams: parser.roundData(html(1), 'LF', 2026, 1).standings }] }
+  } };
+  a.seasons.F2026.rounds[2].data.standings = null;
+  const before = JSON.stringify(a);
+  const load = createService({ competition: 'LF', archive: a, now: () => time, fetch: async (url, options) => {
+    const response = await source.request(url, options);
+    if (!String(url).includes('resultados')) return response;
+    const body = await response.text();
+    return new Response(body.replace('<td>1</td><td>1</td><td>0</td>', '<td>2</td><td>2</td><td>0</td>').replace('<td>1</td><td>0</td><td>1</td>', '<td>2</td><td>0</td><td>2</td>'));
+  } });
+  const data = await load('1');
+  assert.equal(data.round, 1);
+  assert.deepEqual(data.games[0].score, [70, 65]);
+  assert.equal(data.standings.value[0].teams[0].played, 2);
+  assert.match(data.standingsNote, /Jornada 2/);
+  assert.equal(JSON.stringify(a), before);
+});
