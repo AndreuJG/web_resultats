@@ -63,3 +63,35 @@ test('unknown channel dial stays pending and TV output escapes source text', () 
   const html = require('../lib/tv-page').render({ events: [{ date: '2026-10-17T16:00:00Z', title: '<script>x</script> - B', competition: 'ELW', source: 'https://www.movistarplus.es/ficha', channels }], generatedAt: now, sourcesAt: now, errors: [], missing: 0 });
   assert.match(html, /&lt;script&gt;x&lt;\/script&gt;/); assert.match(html, /Dial no publicat/);
 });
+
+
+test('TV keeps earlier broadcasts until Madrid midnight and still excludes yesterday and distant events', () => {
+  const time = Date.parse('2026-10-20T19:00:00Z');
+  const event = { title: 'Local - Visitant', competition: 'E', channels: [], source: 'https://official.example/game' };
+  const dates = ['2026-10-19T21:59:59Z', '2026-10-19T22:00:00Z', '2026-10-20T10:00:00Z', '2026-10-20T20:00:00Z', '2026-10-21T10:00:00Z', '2026-10-27T19:00:00Z'];
+  assert.deepEqual(tv.mergeEvents(dates.map(date => ({ ...event, date })), time).map(e => e.date), dates.slice(1, -1));
+  assert.equal(tv.mergeEvents([{ ...event, date: '2026-10-20T10:00:00Z' }], Date.parse('2026-10-20T22:00:00Z')).length, 0);
+  // The clock changes on 25 October: local midnight was still at UTC+2.
+  assert.equal(tv.mergeEvents([{ ...event, date: '2026-10-24T22:30:00Z' }], Date.parse('2026-10-25T22:00:00Z')).length, 1);
+});
+
+test('TV catalogue and cached agenda retain broadcasts that started earlier today', async () => {
+  let time = Date.parse('2026-10-20T15:00:00Z');
+  const source = 'https://www.movistarplus.es/deportes/baloncesto/euroliga/test/ficha';
+  const calls = [];
+  const load = tv.createService({ now: () => time, request: async url => {
+    calls.push(url);
+    if (url.includes('deportesendirectobar')) return new Response('<span class="fecha-bar">martes 20 de octubre de 2026</span>');
+    if (url.includes('acb.com')) return new Response('<script>self.__next_f.push(' + JSON.stringify([1, 'a:' + JSON.stringify({ matches: [], availableFilters: { rounds: [] }, selectedFilters: {} }) + '\n']) + ')</script>');
+    if (url === source) return new Response('<div class="box-medium pase-container"><img alt="M+ Vamos"></div>');
+    return new Response('<div class="mplus-collection__content"><a class="mplus-collection__title-seo" href="' + source + '">Euroliga: Local - Visitant</a><p class = "mplus-collection__date">Hoy - 12:00h</p></div>');
+  } });
+  const first = await load();
+  assert.equal(first.events.length, 1);
+  assert.equal(first.events[0].date, '2026-10-20T10:00:00.000Z');
+  assert.equal(first.events[0].channels[0].name, 'M+ Vamos');
+  const count = calls.length;
+  time += 30 * 60000;
+  assert.equal((await load()).events.length, 1);
+  assert.equal(calls.length, count);
+});
