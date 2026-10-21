@@ -83,7 +83,7 @@ test('existing permanent FEB archives gain zones on read without rewrites or req
   }
 });
 
-test('national teams remain unchanged as requested', () => {
+test('national zones require verified tournament metadata', () => {
   for (const competition of ['ESM', 'ESW']) {
     const d = data('LF'); d.competition = competition;
     assert.equal(rule(d), null);
