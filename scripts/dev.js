@@ -5,6 +5,7 @@ const path = require('node:path');
 async function start() {
   const { GET: euroleague } = await import('../api/eurolliga.mjs');
   const { GET: eurocup } = await import('../api/eurocup.mjs');
+  const { GET: ecw } = await import('../api/eurocup-femenina.mjs');
   const { GET: acb } = await import('../api/acb.mjs');
   const { GET: female } = await import('../api/lf-endesa.mjs');
   const { GET: tercera } = await import('../api/tercera-feb-ea.mjs');
@@ -16,7 +17,7 @@ async function start() {
   const { GET: esw } = await import('../api/seleccio-femenina.mjs');
   http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://127.0.0.1:8766');
-    const handler = { '/seleccio-masculina.html': esm, '/api/seleccio-masculina': esm, '/seleccio-femenina.html': esw, '/api/seleccio-femenina': esw, '/estadistiques-feb.html': stats, '/api/estadistiques-feb': stats, '/televisio.html': tv, '/api/televisio': tv, '/eurolliga-femenina.html': elw, '/api/eurolliga-femenina': elw, '/champions.html': bcl, '/api/champions': bcl, '/eurolliga.html': euroleague, '/api/eurolliga': euroleague, '/eurocup.html': eurocup, '/api/eurocup': eurocup, '/acb.html': acb, '/api/acb': acb, '/lf-endesa.html': female, '/api/lf-endesa': female, '/tercera-feb-ea.html': tercera, '/api/tercera-feb-ea': tercera }[url.pathname];
+    const handler = { '/eurocup-femenina.html': ecw, '/api/eurocup-femenina': ecw, '/seleccio-masculina.html': esm, '/api/seleccio-masculina': esm, '/seleccio-femenina.html': esw, '/api/seleccio-femenina': esw, '/estadistiques-feb.html': stats, '/api/estadistiques-feb': stats, '/televisio.html': tv, '/api/televisio': tv, '/eurolliga-femenina.html': elw, '/api/eurolliga-femenina': elw, '/champions.html': bcl, '/api/champions': bcl, '/eurolliga.html': euroleague, '/api/eurolliga': euroleague, '/eurocup.html': eurocup, '/api/eurocup': eurocup, '/acb.html': acb, '/api/acb': acb, '/lf-endesa.html': female, '/api/lf-endesa': female, '/tercera-feb-ea.html': tercera, '/api/tercera-feb-ea': tercera }[url.pathname];
     if (handler) {
       const response = await handler(new Request(url));
       res.writeHead(response.status, Object.fromEntries(response.headers));

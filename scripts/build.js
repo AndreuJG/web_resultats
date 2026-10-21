@@ -7,6 +7,7 @@ const competitions = [
   ['eurolliga', 'Eurolliga masculina', 'Euroleague Basketball'],
   ['eurolliga-femenina', 'Eurolliga femenina', 'FIBA'],
   ['eurocup', 'EuroCup masculina', 'Euroleague Basketball'],
+  ['eurocup-femenina', 'EuroCup femenina', 'FIBA'],
   ['champions', 'Basketball Champions League', 'BCL / FIBA'],
   ['tercera-feb-ea', 'Tercera FEB · Grup E-A', 'FEB · antiga Lliga EBA'],
   ['seleccio-masculina', 'Selecció masculina', 'Mundial 2027 · Europa · FIBA'],

@@ -13,6 +13,10 @@
       "destination": "/api/eurocup"
     },
     {
+      "source": "/eurocup-femenina.html",
+      "destination": "/api/eurocup-femenina"
+    },
+    {
       "source": "/acb.html",
       "destination": "/api/acb"
     },
