@@ -187,3 +187,21 @@ La classificació és independent de la jornada de resultats seleccionada. ACB, 
 L'HTML de FIBA pot conservar marcadors antics durant minuts: la pàgina oficial el serveix amb una política de memòria cau de 240 segons i actualitza els partits al navegador per una altra via. Per als partits en joc o pròxims a començar, consultem l'endpoint públic que usa el seu client: `/en/events/api/game-live-info/{id}/light`, en el domini oficial de cada competició. Validem el partit, el nom tècnic i les dues organitzacions, incloent l'ordre invers dels equips.
 
 El calendari i la classificació continuen venint de les fonts anteriors. Els marcadors utilitzen una memòria cau pròpia de 15 segons i la pàgina conserva la recàrrega visible cada 30 segons. Els estats oficials 4, 5 i 999 es tracten com a partit acabat, sense pilot roig. Si falla el directe, es conserva l'últim marcador vàlid amb l'hora original i s'indica que és antic; un marcador antic de l'HTML no es presenta com a directe actual. No es requereixen claus, comptes nous ni connexions de l'iPad a websockets.
+
+### Zones de classificació (2026–27)
+
+`lib/standings-zones.js` declara únicament regles verificades, amb enllaç a la font oficial. Les marques indiquen la zona de la posició actual, sense calcular classificacions matemàtiques. Són HTML amb abreviatura, color i llegenda; no afegeixen JavaScript ni lectures de fonts. Es mantenen el taronja del València i les negretes dels equips.
+
+| Competició / fase | Zones | Font |
+| --- | --- | --- |
+| Eurolliga masculina, fase regular | 1–6 playoff directe; 7–10 play-in | [Calendari i format oficial 2026–27](https://mediacentre.euroleague.net/en/app/2/communication/communication/preview/24407) |
+| EuroCup masculina, fase regular | 1–4 de cada grup de 8 a octaus | [Nou format oficial 2026–27](https://mediacentre.euroleague.net/en/app/2/communication/communication/preview/24408) |
+| ACB, fase regular | 1–8 playoff; 17–18 descens | [Taula i llegenda oficial ACB](https://www.acb.com/es/liga/clasificacion) |
+| Eurolliga femenina, primera fase | 1–3 segona fase; 4 EuroCup femenina | [Sistema oficial 2026–27](https://www.fiba.basketball/en/events/euroleague-women-26-27/competition-system-explained) |
+| Eurolliga femenina, segona fase | 1–2 play-in de semifinals (plaça en Final Six); 3–4 play-in de quarts | Mateixa font |
+| Champions, fase regular | 1 Top 16 directe; 2–3 play-in | [Sistema oficial 2026–27](https://www.championsleague.basketball/en/competition-system) |
+| Champions, Top 16 | 1–2 quarts | Mateixa font |
+
+Les regles són exclusives de la temporada indicada, amb comprovació de mida del grup, rangs complets i fase. FIBA conserva el nom original de la fase **de la classificació**, independent dels partits seleccionats; ACB identifica la seua taula regular de 34 jornades. Una temporada nova, fase desconeguda o taula parcial es mostra sense zones fins que es verifiquen les seues regles. Cal actualitzar aquesta configuració en canviar de temporada; no s'extrapolen les normes automàticament.
+
+Pendents: bases oficials **LF Endesa 2026–27**, bases generals de **Tercera FEB 2026–27 i específiques de la conferència E** (fases d'ascens, descensos i possibles condicionants), i verificació dels sistemes de cada torneig/fase de les seleccions. No s'apliquen a Tercera FEB les normes de les lligues autonòmiques FBCV ni es dedueix un descens en les competicions europees per ocupar les últimes posicions.
