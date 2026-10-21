@@ -77,14 +77,15 @@ test('women third places remain conditional including the three-team group, whil
   assert.doesNotMatch(output, /no indiquen classificació assegurada/);
 });
 
-test('group links filter games and standings together, preserve pause, and phase navigation resets the filter', () => {
+test('group dropdown filters games and standings together, preserve pause, and phase navigation resets the filter', () => {
   const source = fixture('ESM'), d = build([source], 'ESM', 2, now, 'I');
   assert.equal(d.games.length, 3);
   assert.equal(d.standings.value.length, 1);
   const output = render({ ...d, generatedAt: now }, false);
-  assert.match(output, /Grups: <a[^>]*>Tots<\/a>/);
-  assert.match(output, /<strong>I \(Espanya\)<\/strong>/);
-  assert.match(output, /fase=2&amp;jornada=1&amp;grup=J&amp;auto=0/);
+  assert.match(output, /<select id="grup" name="grup">/);
+  assert.match(output, /<option value="">Tots<\/option>/);
+  assert.match(output, /<option value="I" selected>Grup I \(Espanya\)<\/option>/);
+  assert.match(output, /<option value="J">Grup J<\/option>/);
   assert.match(output, /fase=2&amp;grup=I&amp;auto=0">Actualitza ara/);
   assert.match(output, /fase=2&amp;grup=I">Reprén/);
   const phaseForm = output.match(/<form id="phase-form"[\s\S]*?<\/form>/)[0];

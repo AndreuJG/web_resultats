@@ -105,7 +105,10 @@ test('phase, group, pause and matchday navigation stay consistent and standings 
   const output = render({ ...d, generatedAt: now }, false);
   assert.match(output, /fase=2&amp;jornada=2&amp;grup=I&amp;auto=0">← Anterior/);
   assert.match(output, /fase=2&amp;jornada=4&amp;grup=I&amp;auto=0">Següent/);
-  assert.match(output, /fase=2&amp;jornada=3&amp;grup=J&amp;auto=0/);
+  const groupForm = output.match(/<form id="group-form"[\s\S]*?<\/form>/)[0];
+  assert.match(groupForm, /name="jornada" value="3"/);
+  assert.match(groupForm, /name="fase" value="2"/);
+  assert.match(groupForm, /<option value="J">Grup J<\/option>/);
   assert.match(output, /fase=2&amp;jornada=3&amp;grup=I&amp;auto=0">Actualitza ara/);
   assert.match(output, /fase=2&amp;jornada=3&amp;grup=I">Reprén/);
   const phaseForm = output.match(/<form id="phase-form"[\s\S]*?<\/form>/)[0];

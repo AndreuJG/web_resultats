@@ -9,6 +9,7 @@
   }
   autoSubmit('round-form', 'jornada');
   autoSubmit('phase-form', 'fase');
+  autoSubmit('group-form', 'grup');
   var status = document.getElementById('live-refresh-status');
   if (!status || status.getAttribute('data-auto') !== '1') { return; }
   var delay = Number(status.getAttribute('data-refresh-ms'));
