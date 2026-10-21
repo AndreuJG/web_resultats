@@ -83,15 +83,20 @@ test('HTML has text markers, accessible legends and keeps Valencia orange/bold w
   assert.doesNotMatch(render(table('LF', 16)), /class="zones-legend"|class="zone zone-/);
 });
 
-test('FIBA marks the standings phase even when browsing fixtures from another phase', () => {
+test('ELW automatic view labels the real standings phase, while a manual future phase does not borrow that table', () => {
   const team = n => ({ teamId: n, officialName: 'Equip ' + n, code: 'T' + n });
   const game = (id, a, b, phase, name, date) => ({ gameId: id, competition: { competitionCode: 'ELW', start: '2026-10-14' }, round: { roundId: phase, roundName: name }, gameDateTimeUTC: date, hasTimeGameDateTime: true, teamA: team(a), teamB: team(b), isLive: false });
   const games = [game(1, 1, 2, 10, 'First Round', '2026-10-14T17:00:00'), game(2, 3, 4, 10, 'First Round', '2026-10-14T17:00:00'), game(3, 1, 2, 20, 'Second Round', '2026-12-16T17:00:00')];
   const items = [{ type: 'groups', standingHeaderName: 'Regular Season - First Round', roundIds: [10], data: { groups: [{ groupName: 'A', teamsStats: [1, 2, 3, 4].map(n => ({ team: n, rank: n, gamesPlayed: 1, gamesWon: n % 2, gamesLost: 1 - n % 2 })) }] } }];
   const data = fiba(games, items, 'ELW', 2, Date.parse('2026-10-21T12:00:00Z'));
   assert.match(data.roundLabel, /Segona fase/);
-  assert.equal(data.standings.phase, 'Regular Season - First Round');
-  assert.equal(code(data, 4), 'EC');
+  assert.equal(data.standings, null);
+  assert.equal(data.currentStandingsRound, 1);
+  const automatic = fiba(games, items, 'ELW', null, Date.parse('2026-10-21T12:00:00Z'));
+  assert.match(automatic.roundLabel, /Segona fase/);
+  assert.equal(automatic.standings.phase, 'Regular Season - First Round');
+  assert.equal(automatic.standingsTitle, 'Classificació · Primera fase');
+  assert.equal(code(automatic, 4), 'EC');
 });
 
 test('ACB normalizer derives phase from the actual official table and rejects non-regular metadata', () => {
