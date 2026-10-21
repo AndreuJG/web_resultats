@@ -58,7 +58,7 @@ test('BCL regular season and Round of 16 have different qualification boundaries
 });
 
 test('unknown seasons, phases, incomplete tables and unverified competitions stay unmarked', () => {
-  for (const competition of ['LF', 'TERCERA_EA', 'ESM', 'ESW']) assert.equal(rule(table(competition, 4, 'First Round')), null);
+  for (const competition of ['ESM', 'ESW']) assert.equal(rule(table(competition, 4, 'First Round')), null);
   for (const season of ['F2025', 'F2027', undefined]) {
     const data = table('ELW', 4, 'First Round'); data.season = season;
     assert.equal(rule(data), null);
@@ -80,7 +80,7 @@ test('HTML has text markers, accessible legends and keeps Valencia orange/bold w
   assert.match(html, /no indiquen classificació assegurada/);
   assert.match(html, /<span class="valencia-basket"><strong>Valencia Basket Club<\/strong><\/span>/);
   assert.equal((html.match(/<script /g) || []).length, 1);
-  assert.doesNotMatch(render(table('LF', 16)), /class="zones-legend"|class="zone zone-/);
+  assert.doesNotMatch(render(table('ESW', 4)), /class="zones-legend"|class="zone zone-/);
 });
 
 test('ELW automatic view labels the real standings phase, while a manual future phase does not borrow that table', () => {
