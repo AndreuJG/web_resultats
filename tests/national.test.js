@@ -25,7 +25,7 @@ test('national pages expose all fixtures and groups, with an optional Spain grou
   assert.equal(all.standings.value.length, 2);
   const data = build(sources, 'ESM', null, now, 'I');
   assert.equal(data.games.length, 1);
-  assert.equal(data.round, 2);
+  assert.equal(data.phase, 2);
   assert.equal(data.standings.value.length, 1);
   assert.equal(data.standings.value[0].name, 'Grup I');
   assert.equal(data.standings.value[0].teams.length, 2);
@@ -69,6 +69,6 @@ test('national default retains the played phase the following day before advanci
   const played = { ...match(1, '2026-10-18T18:00:00'), gameResultStatusCode: 'VALID', teamAScore: 80, teamBScore: 70 };
   const next = match(2, '2026-11-26T18:00:00');
   const data = [source([played, next])];
-  assert.equal(build(data, 'ESM', null, Date.parse('2026-10-19T12:00:00Z')).round, 1);
-  assert.equal(build(data, 'ESM', null, Date.parse('2026-10-20T12:00:00Z')).round, 2);
+  assert.equal(build(data, 'ESM', null, Date.parse('2026-10-19T12:00:00Z')).phase, 1);
+  assert.equal(build(data, 'ESM', null, Date.parse('2026-10-20T12:00:00Z')).phase, 2);
 });

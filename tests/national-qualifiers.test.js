@@ -35,7 +35,7 @@ const zoneCode = (d, group, position) => zonesFor(d, group)?.zones.find(z => pos
 test('men expose every European group and three qualifying places in each phase', () => {
   const source = fixture('ESM');
   const second = build([source], 'ESM', null, now);
-  assert.equal(second.round, 2);
+  assert.equal(second.phase, 2);
   assert.equal(second.games.length, 6);
   assert.deepEqual(second.availableGroups, [{ code: 'I', spain: true }, { code: 'J', spain: false }]);
   for (const group of second.standings.value) {
@@ -52,8 +52,8 @@ test('men expose every European group and three qualifying places in each phase'
 test('women default to the second qualifying phase while the hosts run in parallel', () => {
   const source = fixture('ESW');
   const second = build([source], 'ESW', null, now);
-  assert.equal(second.round, 3);
-  assert.equal(second.roundLabel, 'Segona fase');
+  assert.equal(second.phase, 3);
+  assert.equal(second.phaseLabel, 'Segona fase');
   assert.equal(second.availableGroups.find(g => g.spain).code, 'J');
   for (const group of second.standings.value) {
     assert.equal(zoneCode(second, group, 2), 'EB');
@@ -84,10 +84,12 @@ test('group links filter games and standings together, preserve pause, and phase
   const output = render({ ...d, generatedAt: now }, false);
   assert.match(output, /Grups: <a[^>]*>Tots<\/a>/);
   assert.match(output, /<strong>I \(Espanya\)<\/strong>/);
-  assert.match(output, /jornada=2&amp;grup=J&amp;auto=0/);
-  assert.match(output, /jornada=2&amp;grup=I&amp;auto=0">Actualitza ara/);
-  assert.match(output, /jornada=2&amp;grup=I">Reprén/);
-  assert.match(output, /jornada=1&amp;auto=0">← Anterior/);
+  assert.match(output, /fase=2&amp;jornada=1&amp;grup=J&amp;auto=0/);
+  assert.match(output, /fase=2&amp;grup=I&amp;auto=0">Actualitza ara/);
+  assert.match(output, /fase=2&amp;grup=I">Reprén/);
+  const phaseForm = output.match(/<form id="phase-form"[\s\S]*?<\/form>/)[0];
+  assert.match(phaseForm, /name="fase"/);
+  assert.doesNotMatch(phaseForm, /name="jornada"|name="grup"/);
   assert.match(output, /· Grup I/);
   assert.equal(build([source], 'ESM', 1, now, 'I').selectedGroup, null);
   const wrongYear = { ...d, eventSeason: 2029 };
