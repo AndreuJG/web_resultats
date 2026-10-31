@@ -18,6 +18,12 @@ Inclou Lliga Endesa masculina, Lliga Femenina Endesa, Eurolliga masculina i feme
 
 ## Desenvolupament
 
+### Treball amb agents
+
+El projecte inclou instruccions en `AGENTS.md` i dos rols de suport en `.codex/agents/`: investigació de fonts oficials i revisió de regressions. Continua en un únic xat del projecte; l'agent principal delega quan aporta valor i integra el resultat. Els retocs menuts es fan amb un sol agent. Guia i exemples: [Treballar amb agents](docs/treball-amb-agents.md).
+
+### Entorn local
+
 Requisit: Node.js 22 o posterior. Dependències del servidor: `@vercel/functions` (memòria cau), `acorn` (lectura de dades SSR) i `seroval` (format dels serveis públics FEB). No s'envien a l'iPad.
 
 ```sh
@@ -262,3 +268,6 @@ El context de temporada/jornada (5 minuts) no s’utilitza com a font de marcado
 Si la font recula en puntuació, període o d’un final a directe, es consulta també la ruta general oficial. Si aquesta aporta dades que no reculen, s’utilitzen; si discrepen o les dues ofereixen una puntuació en viu inferior, es conserva l’última consulta validada amb l’hora original, identificada com a antiga i sense pilot de directe. Es torna a intentar en la visita següent; no es guarda com a nova una dada retinguda. Una correcció de puntuació final és admissible si les dues rutes la confirmen, mantenint període i identitat dels equips. Això pot retardar una correcció provisional real durant el joc fins que la font torne a avançar o confirme el final; no es fabriquen puntuacions.
 
 L’HTML d’ACB amb directe o dades antigues no es conserva en la CDN ni en el navegador. Es manté la memòria cau compartida de les dades per evitar una consulta oficial per usuari. No s’afegeix cap procés periòdic sense visites. Diagnòstic del 31/10/2026: diferents variants oficials retornaven 33–33 i 26–33 per al mateix partit, i el context de cinc minuts podia reintroduir resultats antics.
+
+
+Revisió independent posterior d’ACB: el marcador 0–0 en directe tampoc pot tornar a «no iniciat», mentre que una suspensió oficial explícita sí que es mostra. Una còpia retinguda en una instància freda es conserva amb l’hora original i només el termini de retenció restant. Després de consultar la ruta de contrast es torna a llegir la còpia compartida abans de publicar, per detectar finals guardats durant eixa espera. La memòria cau no ofereix una operació atòmica de comparació i escriptura: aquestes comprovacions redueixen les curses detectades, sense prometre una exclusió global entre regions.
