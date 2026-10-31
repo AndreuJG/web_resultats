@@ -271,3 +271,12 @@ L’HTML d’ACB amb directe o dades antigues no es conserva en la CDN ni en el 
 
 
 Revisió independent posterior d’ACB: el marcador 0–0 en directe tampoc pot tornar a «no iniciat», mentre que una suspensió oficial explícita sí que es mostra. Una còpia retinguda en una instància freda es conserva amb l’hora original i només el termini de retenció restant. Després de consultar la ruta de contrast es torna a llegir la còpia compartida abans de publicar, per detectar finals guardats durant eixa espera. La memòria cau no ofereix una operació atòmica de comparació i escriptura: aquestes comprovacions redueixen les curses detectades, sense prometre una exclusió global entre regions.
+
+
+### Directe ACB des de la fitxa oficial
+
+El calendari HTML pot quedar congelat mentre la fitxa oficial avança. Per als partits actius amb identificadors oficials d’equip, es consulta `https://live.acb.com/es/partidos/{id}/resumen` i es llig la capçalera SSR amb `reactData`, sense executar scripts ni utilitzar claus del client. Es valida partit, equips, competició, edició i hora d’inici. La capçalera aporta puntuació, estat, quart i rellotge; substitueix el resum endarrerit de la llista. Memòria cau compartida de 15 segons en joc, una hora en final i còpia de reserva d’un dia amb hora original. Una fallada conserva l’últim marcador com a antic, sense pilot; si no hi ha còpia de detall, el marcador en joc del calendari també queda identificat com a antic. No es consulta l’API protegida `api2.acb.com`.
+
+Durant el directe també es contrasten les rutes general i de jornada encara que la puntuació no recule, per detectar un calendari que no avança. La consulta auxiliar té un límit de 2,5 segons. Es tria una observació oficial completa amb identitat coherent; no es prenen màxims independents dels dos equips. Les consultes de detall es limiten als partits visibles propers o actius, sense tasques periòdiques quan no hi ha visites.
+
+Mostra real del 31/10/2026: la fitxa de Coruña–Tenerife avançava a 91–89, quart 4 i 00:29 mentre el calendari encara mostrava 89–86. La nova lectura resol aquesta discrepància observada, però no garanteix que el servei oficial mai porte retard.
