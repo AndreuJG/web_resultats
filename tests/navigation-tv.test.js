@@ -57,6 +57,24 @@ test('ACB broadcast platform is not mislabelled as a specific linear channel or 
   assert.deepEqual(events[0].channels.map(c => c.name), ['App DAZN', 'Movistar · canal pendent', 'TV3/3Cat']);
   assert.ok(events[0].channels.every(c => c.dial === null));
 });
+
+test('ACB sponsor and club names identify one Burgos TV fixture without losing confirmed channels', () => {
+  const time = Date.parse('2026-11-06T10:00:00Z');
+  const movistar = { date: '2026-11-08T11:21:00Z', title: 'San Pablo Burgos - Valencia Basket', competition: 'ACB', source: 'https://www.movistarplus.es/ficha', channels: [{ name: 'Movistar Plus', source: 'https://www.movistarplus.es/ficha', dial: null }] };
+  const official = tv.acbEvents({ matches: [{ startDateTime: '2026-11-08T11:30:00Z', homeTeam: { shortName: 'Recoletas Salud', fullName: 'Recoletas Salud San Pablo Burgos' }, awayTeam: { shortName: 'Valencia Basket', fullName: 'Valencia Basket' }, broadcastChannels: { primary: [{ name: 'DAZN' }, { name: 'Movistar Plus +' }] } }] })[0];
+  const events = tv.mergeEvents([official, movistar], time);
+  assert.equal(events.length, 1);
+  assert.equal(official.title, 'Recoletas Salud San Pablo Burgos - Valencia Basket');
+  assert.equal(events[0].date, movistar.date); // Published start of the TV broadcast.
+  assert.equal(events[0].title, movistar.title);
+  assert.deepEqual(events[0].channels.map(c => c.name), ['Movistar Plus', 'App DAZN']);
+  assert.deepEqual(events[0].channels.map(c => c.source), [movistar.source, official.source]);
+  // Reading an already cached agenda uses the same deduplication path.
+  assert.equal(tv.mergeEvents([movistar, official], time).length, 1);
+  for (const change of [{ title: 'Recoletas Zamora - Valencia Basket' }, { title: 'Recoletas Salud - Real Madrid' }, { competition: 'LF' }, { competition: 'U' }, { date: '2026-11-08T12:00:00Z' }, { date: '2026-11-09T11:30:00Z' }]) {
+    assert.equal(tv.mergeEvents([movistar, { ...official, ...change }], time).length, 2);
+  }
+});
 test('unknown channel dial stays pending and TV output escapes source text', () => {
   const channels = tv.parseChannels('<div class="box-medium pase-container"><img alt="M+ Vamos 2"></div>', {}, 'https://www.movistarplus.es/ficha');
   assert.equal(channels[0].dial, null);
