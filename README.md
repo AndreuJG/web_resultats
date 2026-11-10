@@ -201,7 +201,11 @@ Les lligues conserven la jornada disputada fins al dia següent de l'últim part
 La classificació és independent de la jornada de resultats seleccionada. ACB, Eurolliga i EuroCup utilitzen la classificació oficial més recent; FIBA utilitza la fase actual amb una taula publicada, conservant l'última fase de grups si la següent encara no té taula. En Eurolliga femenina, una selecció manual també conserva exclusivament la classificació de la fase triada; la vista automàtica manté l'última taula publicada i en mostra explícitament la fase al títol. Les fases de seleccions conserven el grup corresponent a la fase seleccionada. FEB reutilitza l'última classificació real arxivada i, durant partits, la de la jornada activa. El títol indica la jornada o fase de la classificació. Les dades històriques guardades no es modifiquen en consultar-les; les tasques d'arxiu continuen guardant la taula original de cada jornada.
 
 
-### Directe de FIBA: Eurolliga femenina i Champions
+### Directe de FIBA: competicions de clubs i seleccions
+
+Les seleccions masculina i femenina també consulten aquest servei públic per als partits visibles, després dels filtres de fase, jornada i grup. Comparteixen el client amb les competicions de clubs: marcadors de 15 segons, validació de partit/organitzacions i retenció de l’hora original amb avís de dades antigues i sense pilot de directe si falla. La classificació continua independent. No es fan consultes directes des de l’iPad ni s’afegeix cap sondeig sense visites. El quart i el rellotge es mostren tal com els publica FIBA; Q2/00:00 no es tradueix automàticament a «Descans» sense un estat explícit verificat.
+
+Verificació del 10/11/2026 a les 21:17 Madrid: l’HTML del classificatori femení conservava Espanya–Txèquia 31–26, Q2/04:04, mentre que `/en/events/api/game-live-info/129106/light` publicava 43–36, Q2/00:00. L’adaptador de seleccions anterior només llegia aquell HTML.
 
 L'HTML de FIBA pot conservar marcadors antics durant minuts: la pàgina oficial el serveix amb una política de memòria cau de 240 segons i actualitza els partits al navegador per una altra via. Per als partits en joc o pròxims a començar, consultem l'endpoint públic que usa el seu client: `/en/events/api/game-live-info/{id}/light`, en el domini oficial de cada competició. Validem el partit, el nom tècnic i les dues organitzacions, incloent l'ordre invers dels equips.
 
