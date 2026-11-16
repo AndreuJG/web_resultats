@@ -2,7 +2,7 @@
   "version": 1,
   "seasons": {
     "F2026": {
-      "updatedAt": 1794734616421,
+      "updatedAt": 1794822039576,
       "calendar": [
         {
           "idPartido": 2537571,
@@ -820,16 +820,16 @@
           "matchday": "J7",
           "fecha": "15/11/2026",
           "hora": "18:00",
-          "state": "upcoming",
+          "state": "final",
           "teamA": {
             "name": "CEMALU ALDAIA",
             "classicId": 1009585,
-            "score": ""
+            "score": "51"
           },
           "teamB": {
             "name": "TRAUMACOKE EL PILAR",
             "classicId": 1010319,
-            "score": ""
+            "score": "106"
           }
         },
         {
@@ -838,16 +838,16 @@
           "matchday": "J7",
           "fecha": "15/11/2026",
           "hora": "16:30",
-          "state": "upcoming",
+          "state": "final",
           "teamA": {
             "name": "TURBO MANISES C.B.C M-Q",
             "classicId": 1010492,
-            "score": ""
+            "score": "67"
           },
           "teamB": {
             "name": "HALAL FOOD QUALITY UIXÓ BÀSQUET",
             "classicId": 1008694,
-            "score": ""
+            "score": "73"
           }
         },
         {
@@ -874,16 +874,16 @@
           "matchday": "J7",
           "fecha": "15/11/2026",
           "hora": "19:00",
-          "state": "upcoming",
+          "state": "final",
           "teamA": {
             "name": "CB JOVENS ALMÀSSERA",
             "classicId": 1010491,
-            "score": ""
+            "score": "96"
           },
           "teamB": {
             "name": "BAUHAUS GODELLA",
             "classicId": 1009719,
-            "score": ""
+            "score": "98"
           }
         },
         {
@@ -3839,7 +3839,7 @@
           }
         },
         "3": {
-          "savedAt": 1794734612227,
+          "savedAt": 1794822036173,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -3891,7 +3891,7 @@
                 "stale": false,
                 "label": "Final",
                 "timeUnknown": false,
-                "checkedAt": 1794734612227
+                "checkedAt": 1794822036173
               },
               {
                 "code": 2537588,
@@ -3910,7 +3910,7 @@
                 "stale": false,
                 "label": "Final",
                 "timeUnknown": false,
-                "checkedAt": 1794734612227
+                "checkedAt": 1794822036173
               },
               {
                 "code": 2537589,
@@ -3929,7 +3929,7 @@
                 "stale": false,
                 "label": "Final",
                 "timeUnknown": false,
-                "checkedAt": 1794734612227
+                "checkedAt": 1794822036173
               },
               {
                 "code": 2537585,
@@ -3949,7 +3949,7 @@
                 "label": "Final",
                 "timeUnknown": false,
                 "statsUrl": "/estadistiques-feb.html?partit=2537585&jornada=3",
-                "checkedAt": 1794734612227
+                "checkedAt": 1794822036173
               },
               {
                 "code": 2537591,
@@ -3968,7 +3968,7 @@
                 "stale": false,
                 "label": "Final",
                 "timeUnknown": false,
-                "checkedAt": 1794734612227
+                "checkedAt": 1794822036173
               },
               {
                 "code": 2537587,
@@ -3987,7 +3987,7 @@
                 "stale": false,
                 "label": "Final",
                 "timeUnknown": false,
-                "checkedAt": 1794734612227
+                "checkedAt": 1794822036173
               },
               {
                 "code": 2537590,
@@ -4003,7 +4003,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734612227
+                "checkedAt": 1794822036173
               }
             ],
             "standings": {
@@ -4112,12 +4112,12 @@
                   ]
                 }
               ],
-              "at": 1794734612227,
+              "at": 1794822036173,
               "stale": false,
               "refreshing": false
             },
             "standingsNote": "Classificació oficial · Jornada 3",
-            "generatedAt": 1794734612227,
+            "generatedAt": 1794822036173,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
@@ -4984,8 +4984,8 @@
           }
         },
         "7": {
-          "savedAt": 1794734612914,
-          "closed": false,
+          "savedAt": 1794822036604,
+          "closed": true,
           "data": {
             "competition": "TERCERA_EA",
             "season": "F2026",
@@ -5035,8 +5035,8 @@
                 ],
                 "stale": false,
                 "label": "Final",
-                "checkedAt": 1794734612912,
-                "timeUnknown": false
+                "timeUnknown": false,
+                "checkedAt": 1794822036604
               },
               {
                 "code": 2537614,
@@ -5054,8 +5054,8 @@
                 ],
                 "stale": false,
                 "label": "Final",
-                "checkedAt": 1794734612912,
-                "timeUnknown": false
+                "timeUnknown": false,
+                "checkedAt": 1794822036604
               },
               {
                 "code": 2537615,
@@ -5073,9 +5073,9 @@
                 ],
                 "stale": false,
                 "label": "Final",
-                "checkedAt": 1794734612912,
                 "timeUnknown": false,
-                "statsUrl": "/estadistiques-feb.html?partit=2537615&jornada=7"
+                "statsUrl": "/estadistiques-feb.html?partit=2537615&jornada=7",
+                "checkedAt": 1794822036604
               },
               {
                 "code": 2537613,
@@ -5093,8 +5093,8 @@
                 ],
                 "stale": false,
                 "label": "Final",
-                "checkedAt": 1794734612912,
-                "timeUnknown": false
+                "timeUnknown": false,
+                "checkedAt": 1794822036604
               },
               {
                 "code": 2537617,
@@ -5105,11 +5105,14 @@
                 "away": {
                   "name": "HALAL FOOD QUALITY UIXÓ BÀSQUET"
                 },
-                "state": "scheduled",
-                "score": null,
+                "state": "final",
+                "score": [
+                  67,
+                  73
+                ],
                 "stale": false,
-                "label": "Pendent",
-                "checkedAt": 1794734612912,
+                "label": "Final",
+                "checkedAt": 1794822036602,
                 "timeUnknown": false
               },
               {
@@ -5121,11 +5124,14 @@
                 "away": {
                   "name": "TRAUMACOKE EL PILAR"
                 },
-                "state": "scheduled",
-                "score": null,
+                "state": "final",
+                "score": [
+                  51,
+                  106
+                ],
                 "stale": false,
-                "label": "Pendent",
-                "checkedAt": 1794734612912,
+                "label": "Final",
+                "checkedAt": 1794822036602,
                 "timeUnknown": false
               },
               {
@@ -5137,11 +5143,14 @@
                 "away": {
                   "name": "BAUHAUS GODELLA"
                 },
-                "state": "scheduled",
-                "score": null,
+                "state": "final",
+                "score": [
+                  96,
+                  98
+                ],
                 "stale": false,
-                "label": "Pendent",
-                "checkedAt": 1794734612912,
+                "label": "Final",
+                "checkedAt": 1794822036602,
                 "timeUnknown": false
               }
             ],
@@ -5167,29 +5176,29 @@
                     {
                       "name": "TRAUMACOKE EL PILAR",
                       "position": 3,
-                      "played": 6,
-                      "won": 5,
+                      "played": 7,
+                      "won": 6,
                       "lost": 1
                     },
                     {
                       "name": "BAUHAUS GODELLA",
                       "position": 4,
-                      "played": 6,
-                      "won": 4,
+                      "played": 7,
+                      "won": 5,
                       "lost": 2
                     },
                     {
-                      "name": "AMICS CASTELLÓ B",
+                      "name": "HALAL FOOD QUALITY UIXÓ BÀSQUET",
                       "position": 5,
                       "played": 7,
                       "won": 4,
                       "lost": 3
                     },
                     {
-                      "name": "HALAL FOOD QUALITY UIXÓ BÀSQUET",
+                      "name": "AMICS CASTELLÓ B",
                       "position": 6,
-                      "played": 6,
-                      "won": 3,
+                      "played": 7,
+                      "won": 4,
                       "lost": 3
                     },
                     {
@@ -5216,26 +5225,26 @@
                     {
                       "name": "CB JOVENS ALMÀSSERA",
                       "position": 10,
-                      "played": 5,
+                      "played": 6,
                       "won": 2,
-                      "lost": 3
+                      "lost": 4
                     },
                     {
                       "name": "CEMALU ALDAIA",
                       "position": 11,
-                      "played": 5,
-                      "won": 2,
-                      "lost": 3
-                    },
-                    {
-                      "name": "TURBO MANISES C.B.C M-Q",
-                      "position": 12,
                       "played": 6,
-                      "won": 1,
-                      "lost": 5
+                      "won": 2,
+                      "lost": 4
                     },
                     {
                       "name": "CB TABERNES BLANQUES - FERNANDO GIL",
+                      "position": 12,
+                      "played": 7,
+                      "won": 1,
+                      "lost": 6
+                    },
+                    {
+                      "name": "TURBO MANISES C.B.C M-Q",
                       "position": 13,
                       "played": 7,
                       "won": 1,
@@ -5251,18 +5260,18 @@
                   ]
                 }
               ],
-              "at": 1794734612914,
+              "at": 1794822036604,
               "stale": false,
               "refreshing": false
             },
             "standingsNote": "Classificació oficial · Jornada 7",
-            "generatedAt": 1794734612914,
+            "generatedAt": 1794822036604,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "8": {
-          "savedAt": 1794734613094,
+          "savedAt": 1794822036777,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -5311,7 +5320,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613093
+                "checkedAt": 1794822036777
               },
               {
                 "code": 2537625,
@@ -5327,7 +5336,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613093
+                "checkedAt": 1794822036777
               },
               {
                 "code": 2537620,
@@ -5343,7 +5352,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613093
+                "checkedAt": 1794822036777
               },
               {
                 "code": 2537621,
@@ -5359,7 +5368,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613093
+                "checkedAt": 1794822036777
               },
               {
                 "code": 2537622,
@@ -5375,7 +5384,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613093
+                "checkedAt": 1794822036777
               },
               {
                 "code": 2537626,
@@ -5391,7 +5400,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613093
+                "checkedAt": 1794822036777
               },
               {
                 "code": 2537623,
@@ -5407,18 +5416,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613093
+                "checkedAt": 1794822036777
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 8",
-            "generatedAt": 1794734613093,
+            "generatedAt": 1794822036777,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "9": {
-          "savedAt": 1794734613295,
+          "savedAt": 1794822036932,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -5467,7 +5476,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613295
+                "checkedAt": 1794822036932
               },
               {
                 "code": 2537633,
@@ -5483,7 +5492,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613295
+                "checkedAt": 1794822036932
               },
               {
                 "code": 2537627,
@@ -5499,7 +5508,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613295
+                "checkedAt": 1794822036932
               },
               {
                 "code": 2537630,
@@ -5515,7 +5524,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613295
+                "checkedAt": 1794822036932
               },
               {
                 "code": 2537629,
@@ -5531,7 +5540,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613295
+                "checkedAt": 1794822036932
               },
               {
                 "code": 2537628,
@@ -5547,7 +5556,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613295
+                "checkedAt": 1794822036932
               },
               {
                 "code": 2537632,
@@ -5563,18 +5572,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613295
+                "checkedAt": 1794822036932
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 9",
-            "generatedAt": 1794734613295,
+            "generatedAt": 1794822036932,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "10": {
-          "savedAt": 1794734613472,
+          "savedAt": 1794822037086,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -5623,7 +5632,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613472
+                "checkedAt": 1794822037086
               },
               {
                 "code": 2537637,
@@ -5639,7 +5648,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613472
+                "checkedAt": 1794822037086
               },
               {
                 "code": 2537638,
@@ -5655,7 +5664,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613472
+                "checkedAt": 1794822037086
               },
               {
                 "code": 2537640,
@@ -5671,7 +5680,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613472
+                "checkedAt": 1794822037086
               },
               {
                 "code": 2537639,
@@ -5687,7 +5696,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613472
+                "checkedAt": 1794822037086
               },
               {
                 "code": 2537636,
@@ -5703,7 +5712,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613472
+                "checkedAt": 1794822037086
               },
               {
                 "code": 2537634,
@@ -5719,18 +5728,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613472
+                "checkedAt": 1794822037086
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 10",
-            "generatedAt": 1794734613472,
+            "generatedAt": 1794822037086,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "11": {
-          "savedAt": 1794734613650,
+          "savedAt": 1794822037239,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -5779,7 +5788,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613650
+                "checkedAt": 1794822037239
               },
               {
                 "code": 2537646,
@@ -5795,7 +5804,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613650
+                "checkedAt": 1794822037239
               },
               {
                 "code": 2537647,
@@ -5811,7 +5820,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613650
+                "checkedAt": 1794822037239
               },
               {
                 "code": 2537645,
@@ -5827,7 +5836,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613650
+                "checkedAt": 1794822037239
               },
               {
                 "code": 2537641,
@@ -5843,7 +5852,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613650
+                "checkedAt": 1794822037239
               },
               {
                 "code": 2537643,
@@ -5859,7 +5868,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613650
+                "checkedAt": 1794822037239
               },
               {
                 "code": 2537642,
@@ -5875,18 +5884,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613650
+                "checkedAt": 1794822037239
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 11",
-            "generatedAt": 1794734613650,
+            "generatedAt": 1794822037239,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "12": {
-          "savedAt": 1794734613843,
+          "savedAt": 1794822037392,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -5935,7 +5944,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613843
+                "checkedAt": 1794822037392
               },
               {
                 "code": 2537651,
@@ -5951,7 +5960,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613843
+                "checkedAt": 1794822037392
               },
               {
                 "code": 2537653,
@@ -5967,7 +5976,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613843
+                "checkedAt": 1794822037392
               },
               {
                 "code": 2537654,
@@ -5983,7 +5992,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613843
+                "checkedAt": 1794822037392
               },
               {
                 "code": 2537652,
@@ -5999,7 +6008,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613843
+                "checkedAt": 1794822037392
               },
               {
                 "code": 2537648,
@@ -6015,7 +6024,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613843
+                "checkedAt": 1794822037392
               },
               {
                 "code": 2537649,
@@ -6031,18 +6040,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734613843
+                "checkedAt": 1794822037392
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 12",
-            "generatedAt": 1794734613843,
+            "generatedAt": 1794822037392,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "13": {
-          "savedAt": 1794734614052,
+          "savedAt": 1794822037547,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -6091,7 +6100,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614052
+                "checkedAt": 1794822037547
               },
               {
                 "code": 2537659,
@@ -6107,7 +6116,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614052
+                "checkedAt": 1794822037547
               },
               {
                 "code": 2537660,
@@ -6123,7 +6132,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614052
+                "checkedAt": 1794822037547
               },
               {
                 "code": 2537661,
@@ -6139,7 +6148,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614052
+                "checkedAt": 1794822037547
               },
               {
                 "code": 2537658,
@@ -6155,7 +6164,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614052
+                "checkedAt": 1794822037547
               },
               {
                 "code": 2537656,
@@ -6171,7 +6180,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614052
+                "checkedAt": 1794822037547
               },
               {
                 "code": 2537655,
@@ -6187,18 +6196,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614052
+                "checkedAt": 1794822037547
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 13",
-            "generatedAt": 1794734614052,
+            "generatedAt": 1794822037547,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "14": {
-          "savedAt": 1794734614241,
+          "savedAt": 1794822037701,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -6247,7 +6256,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614241
+                "checkedAt": 1794822037700
               },
               {
                 "code": 2537665,
@@ -6263,7 +6272,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614241
+                "checkedAt": 1794822037700
               },
               {
                 "code": 2537664,
@@ -6279,7 +6288,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614241
+                "checkedAt": 1794822037700
               },
               {
                 "code": 2537663,
@@ -6295,7 +6304,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614241
+                "checkedAt": 1794822037700
               },
               {
                 "code": 2537666,
@@ -6311,7 +6320,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614241
+                "checkedAt": 1794822037700
               },
               {
                 "code": 2537668,
@@ -6327,7 +6336,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614241
+                "checkedAt": 1794822037700
               },
               {
                 "code": 2537662,
@@ -6343,18 +6352,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614241
+                "checkedAt": 1794822037700
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 14",
-            "generatedAt": 1794734614241,
+            "generatedAt": 1794822037700,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "15": {
-          "savedAt": 1794734614435,
+          "savedAt": 1794822037854,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -6403,7 +6412,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614435
+                "checkedAt": 1794822037854
               },
               {
                 "code": 2537674,
@@ -6419,7 +6428,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614435
+                "checkedAt": 1794822037854
               },
               {
                 "code": 2537672,
@@ -6435,7 +6444,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614435
+                "checkedAt": 1794822037854
               },
               {
                 "code": 2537669,
@@ -6451,7 +6460,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614435
+                "checkedAt": 1794822037854
               },
               {
                 "code": 2537671,
@@ -6467,7 +6476,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614435
+                "checkedAt": 1794822037854
               },
               {
                 "code": 2537670,
@@ -6483,7 +6492,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614435
+                "checkedAt": 1794822037854
               },
               {
                 "code": 2537673,
@@ -6499,18 +6508,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614435
+                "checkedAt": 1794822037854
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 15",
-            "generatedAt": 1794734614435,
+            "generatedAt": 1794822037854,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "16": {
-          "savedAt": 1794734614614,
+          "savedAt": 1794822038008,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -6559,7 +6568,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614614
+                "checkedAt": 1794822038008
               },
               {
                 "code": 2537680,
@@ -6575,7 +6584,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614614
+                "checkedAt": 1794822038008
               },
               {
                 "code": 2537676,
@@ -6591,7 +6600,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614614
+                "checkedAt": 1794822038008
               },
               {
                 "code": 2537679,
@@ -6607,7 +6616,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614614
+                "checkedAt": 1794822038008
               },
               {
                 "code": 2537678,
@@ -6623,7 +6632,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614614
+                "checkedAt": 1794822038008
               },
               {
                 "code": 2537681,
@@ -6639,7 +6648,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614614
+                "checkedAt": 1794822038008
               },
               {
                 "code": 2537677,
@@ -6655,18 +6664,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614614
+                "checkedAt": 1794822038008
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 16",
-            "generatedAt": 1794734614614,
+            "generatedAt": 1794822038008,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "17": {
-          "savedAt": 1794734614793,
+          "savedAt": 1794822038162,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -6715,7 +6724,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614793
+                "checkedAt": 1794822038162
               },
               {
                 "code": 2537687,
@@ -6731,7 +6740,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614793
+                "checkedAt": 1794822038162
               },
               {
                 "code": 2537683,
@@ -6747,7 +6756,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614793
+                "checkedAt": 1794822038162
               },
               {
                 "code": 2537686,
@@ -6763,7 +6772,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614793
+                "checkedAt": 1794822038162
               },
               {
                 "code": 2537684,
@@ -6779,7 +6788,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614793
+                "checkedAt": 1794822038162
               },
               {
                 "code": 2537685,
@@ -6795,7 +6804,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614793
+                "checkedAt": 1794822038162
               },
               {
                 "code": 2537688,
@@ -6811,18 +6820,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614793
+                "checkedAt": 1794822038162
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 17",
-            "generatedAt": 1794734614793,
+            "generatedAt": 1794822038162,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "18": {
-          "savedAt": 1794734614977,
+          "savedAt": 1794822038314,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -6871,7 +6880,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614977
+                "checkedAt": 1794822038314
               },
               {
                 "code": 2537695,
@@ -6887,7 +6896,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614977
+                "checkedAt": 1794822038314
               },
               {
                 "code": 2537694,
@@ -6903,7 +6912,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614977
+                "checkedAt": 1794822038314
               },
               {
                 "code": 2537693,
@@ -6919,7 +6928,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614977
+                "checkedAt": 1794822038314
               },
               {
                 "code": 2537696,
@@ -6935,7 +6944,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614977
+                "checkedAt": 1794822038314
               },
               {
                 "code": 2537690,
@@ -6951,7 +6960,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614977
+                "checkedAt": 1794822038314
               },
               {
                 "code": 2537692,
@@ -6967,18 +6976,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734614977
+                "checkedAt": 1794822038314
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 18",
-            "generatedAt": 1794734614977,
+            "generatedAt": 1794822038314,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "19": {
-          "savedAt": 1794734615154,
+          "savedAt": 1794822038467,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -7027,7 +7036,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615154
+                "checkedAt": 1794822038467
               },
               {
                 "code": 2537702,
@@ -7043,7 +7052,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615154
+                "checkedAt": 1794822038467
               },
               {
                 "code": 2537697,
@@ -7059,7 +7068,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615154
+                "checkedAt": 1794822038467
               },
               {
                 "code": 2537701,
@@ -7075,7 +7084,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615154
+                "checkedAt": 1794822038467
               },
               {
                 "code": 2537699,
@@ -7091,7 +7100,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615154
+                "checkedAt": 1794822038467
               },
               {
                 "code": 2537700,
@@ -7107,7 +7116,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615154
+                "checkedAt": 1794822038467
               },
               {
                 "code": 2537703,
@@ -7123,18 +7132,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615154
+                "checkedAt": 1794822038467
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 19",
-            "generatedAt": 1794734615154,
+            "generatedAt": 1794822038467,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "20": {
-          "savedAt": 1794734615342,
+          "savedAt": 1794822038619,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -7183,7 +7192,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615342
+                "checkedAt": 1794822038619
               },
               {
                 "code": 2537710,
@@ -7199,7 +7208,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615342
+                "checkedAt": 1794822038619
               },
               {
                 "code": 2537709,
@@ -7215,7 +7224,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615342
+                "checkedAt": 1794822038619
               },
               {
                 "code": 2537705,
@@ -7231,7 +7240,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615342
+                "checkedAt": 1794822038619
               },
               {
                 "code": 2537704,
@@ -7247,7 +7256,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615342
+                "checkedAt": 1794822038619
               },
               {
                 "code": 2537707,
@@ -7263,7 +7272,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615342
+                "checkedAt": 1794822038619
               },
               {
                 "code": 2537708,
@@ -7279,18 +7288,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615342
+                "checkedAt": 1794822038619
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 20",
-            "generatedAt": 1794734615342,
+            "generatedAt": 1794822038619,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "21": {
-          "savedAt": 1794734615520,
+          "savedAt": 1794822038774,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -7339,7 +7348,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615520
+                "checkedAt": 1794822038774
               },
               {
                 "code": 2537712,
@@ -7355,7 +7364,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615520
+                "checkedAt": 1794822038774
               },
               {
                 "code": 2537717,
@@ -7371,7 +7380,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615520
+                "checkedAt": 1794822038774
               },
               {
                 "code": 2537716,
@@ -7387,7 +7396,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615520
+                "checkedAt": 1794822038774
               },
               {
                 "code": 2537711,
@@ -7403,7 +7412,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615520
+                "checkedAt": 1794822038774
               },
               {
                 "code": 2537714,
@@ -7419,7 +7428,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615520
+                "checkedAt": 1794822038774
               },
               {
                 "code": 2537715,
@@ -7435,18 +7444,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615520
+                "checkedAt": 1794822038774
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 21",
-            "generatedAt": 1794734615520,
+            "generatedAt": 1794822038774,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "22": {
-          "savedAt": 1794734615697,
+          "savedAt": 1794822038929,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -7495,7 +7504,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615697
+                "checkedAt": 1794822038929
               },
               {
                 "code": 2537724,
@@ -7511,7 +7520,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615697
+                "checkedAt": 1794822038929
               },
               {
                 "code": 2537723,
@@ -7527,7 +7536,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615697
+                "checkedAt": 1794822038929
               },
               {
                 "code": 2537718,
@@ -7543,7 +7552,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615697
+                "checkedAt": 1794822038929
               },
               {
                 "code": 2537720,
@@ -7559,7 +7568,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615697
+                "checkedAt": 1794822038929
               },
               {
                 "code": 2537719,
@@ -7575,7 +7584,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615697
+                "checkedAt": 1794822038929
               },
               {
                 "code": 2537722,
@@ -7591,18 +7600,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615697
+                "checkedAt": 1794822038929
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 22",
-            "generatedAt": 1794734615697,
+            "generatedAt": 1794822038929,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "23": {
-          "savedAt": 1794734615877,
+          "savedAt": 1794822039085,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -7651,7 +7660,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615877
+                "checkedAt": 1794822039085
               },
               {
                 "code": 2537726,
@@ -7667,7 +7676,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615877
+                "checkedAt": 1794822039085
               },
               {
                 "code": 2537727,
@@ -7683,7 +7692,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615877
+                "checkedAt": 1794822039085
               },
               {
                 "code": 2537725,
@@ -7699,7 +7708,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615877
+                "checkedAt": 1794822039085
               },
               {
                 "code": 2537731,
@@ -7715,7 +7724,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615877
+                "checkedAt": 1794822039085
               },
               {
                 "code": 2537729,
@@ -7731,7 +7740,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615877
+                "checkedAt": 1794822039085
               },
               {
                 "code": 2537730,
@@ -7747,18 +7756,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734615877
+                "checkedAt": 1794822039085
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 23",
-            "generatedAt": 1794734615877,
+            "generatedAt": 1794822039085,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "24": {
-          "savedAt": 1794734616054,
+          "savedAt": 1794822039240,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -7807,7 +7816,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616053
+                "checkedAt": 1794822039240
               },
               {
                 "code": 2537736,
@@ -7823,7 +7832,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616053
+                "checkedAt": 1794822039240
               },
               {
                 "code": 2537735,
@@ -7839,7 +7848,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616053
+                "checkedAt": 1794822039240
               },
               {
                 "code": 2537733,
@@ -7855,7 +7864,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616053
+                "checkedAt": 1794822039240
               },
               {
                 "code": 2537732,
@@ -7871,7 +7880,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616053
+                "checkedAt": 1794822039240
               },
               {
                 "code": 2537734,
@@ -7887,7 +7896,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616053
+                "checkedAt": 1794822039240
               },
               {
                 "code": 2537737,
@@ -7903,18 +7912,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616053
+                "checkedAt": 1794822039240
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 24",
-            "generatedAt": 1794734616053,
+            "generatedAt": 1794822039240,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "25": {
-          "savedAt": 1794734616232,
+          "savedAt": 1794822039418,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -7963,7 +7972,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616232
+                "checkedAt": 1794822039418
               },
               {
                 "code": 2537741,
@@ -7979,7 +7988,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616232
+                "checkedAt": 1794822039418
               },
               {
                 "code": 2537740,
@@ -7995,7 +8004,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616232
+                "checkedAt": 1794822039418
               },
               {
                 "code": 2537739,
@@ -8011,7 +8020,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616232
+                "checkedAt": 1794822039418
               },
               {
                 "code": 2537742,
@@ -8027,7 +8036,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616232
+                "checkedAt": 1794822039418
               },
               {
                 "code": 2537744,
@@ -8043,7 +8052,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616232
+                "checkedAt": 1794822039418
               },
               {
                 "code": 2537745,
@@ -8059,18 +8068,18 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616232
+                "checkedAt": 1794822039418
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 25",
-            "generatedAt": 1794734616232,
+            "generatedAt": 1794822039418,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
         },
         "26": {
-          "savedAt": 1794734616420,
+          "savedAt": 1794822039574,
           "closed": false,
           "data": {
             "competition": "TERCERA_EA",
@@ -8119,7 +8128,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616420
+                "checkedAt": 1794822039574
               },
               {
                 "code": 2537747,
@@ -8135,7 +8144,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616420
+                "checkedAt": 1794822039574
               },
               {
                 "code": 2537748,
@@ -8151,7 +8160,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616420
+                "checkedAt": 1794822039574
               },
               {
                 "code": 2537749,
@@ -8167,7 +8176,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616420
+                "checkedAt": 1794822039574
               },
               {
                 "code": 2537750,
@@ -8183,7 +8192,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616420
+                "checkedAt": 1794822039574
               },
               {
                 "code": 2537751,
@@ -8199,7 +8208,7 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616420
+                "checkedAt": 1794822039574
               },
               {
                 "code": 2537752,
@@ -8215,12 +8224,12 @@
                 "stale": false,
                 "label": "Pendent",
                 "timeUnknown": false,
-                "checkedAt": 1794734616420
+                "checkedAt": 1794822039574
               }
             ],
             "standings": null,
             "standingsNote": "Classificació oficial · Jornada 26",
-            "generatedAt": 1794734616420,
+            "generatedAt": 1794822039574,
             "scheduleStale": false,
             "scheduleRefreshing": false
           }
